@@ -8,7 +8,6 @@ import DocumentTitle from 'react-document-title';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { Layout } from 'antd';
-import ProtectedRoute from '../../components/Router/ProtectedRoute';
 import SiderMenu from '../../components/SiderMenu';
 import { appRouters } from '../Router/router.config';
 import utils from '../../utils/utils';
@@ -49,7 +48,7 @@ class AppLayout extends React.Component<any> {
           </Layout.Header>
           <Content style={{ margin: 16 }}>
             <Switch>
-              {pathname === '/' && <Redirect from="/" to="/dashboard" />}
+              {pathname === '/' && <Redirect from="/" to="/join-game" />}
               {appRouters
                 .filter((item: any) => !item.isLayout)
                 .map((route: any, index: any) => (
@@ -57,7 +56,7 @@ class AppLayout extends React.Component<any> {
                     exact
                     key={index}
                     path={route.path}
-                    render={props => <ProtectedRoute component={route.component} permission={route.permission} />}
+                    render={props => <Route component={route.component} permission={route.permission} />}
                   />
                 ))}
               {pathname !== '/' && <NotFoundRoute />}

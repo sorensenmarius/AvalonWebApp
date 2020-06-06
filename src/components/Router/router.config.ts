@@ -2,6 +2,17 @@ import LoadableComponent from './../Loadable/index';
 
 export const userRouter: any = [
   {
+    path: '/',
+    exact: true,
+    name: 'home',
+    permission: '',
+    title: 'Home',
+    icon: 'home',
+    component: LoadableComponent(() => import('../../components/Layout/AppLayout')),
+    isLayout: true,
+    showInMenu: false,
+  },
+  {
     path: '/user',
     name: 'user',
     title: 'User',
@@ -16,20 +27,18 @@ export const userRouter: any = [
     component: LoadableComponent(() => import('../../scenes/Login')),
     showInMenu: false,
   },
+  {
+    path: '/join-game',
+    exact: true,
+    name: 'join-game',
+    title: 'Join Game',
+    icon: 'play-circle',
+    showInMenu: true,
+    component: LoadableComponent(() => import('../../scenes/GameStart'))
+  },
 ];
 
 export const appRouters: any = [
-  {
-    path: '/',
-    exact: true,
-    name: 'home',
-    permission: '',
-    title: 'Home',
-    icon: 'home',
-    component: LoadableComponent(() => import('../../components/Layout/AppLayout')),
-    isLayout: true,
-    showInMenu: false,
-  },
   {
     path: '/dashboard',
     name: 'dashboard',
