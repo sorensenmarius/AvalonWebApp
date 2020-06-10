@@ -13,7 +13,7 @@ class SignalRAspNetCoreHelper {
       hubs: undefined,
       qs: AppConsts.authorization.encrptedAuthTokenName + '=' + encodeURIComponent(encryptedAuthToken),
       remoteServiceBaseUrl: AppConsts.remoteServiceBaseUrl,
-      url: '/signalr'
+      url: 'gameHub'
     };
 
     Util.loadScript(AppConsts.appBaseUrl + '/dist/abp.signalr-client.js');

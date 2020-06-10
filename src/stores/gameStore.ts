@@ -11,4 +11,10 @@ export default class GameStore {
         let response = await gameService.createGame();
         this.currentGame = response;
     }
+
+    @action
+    async get(gameId: string) {
+        let response = await gameService.get(gameId);
+        this.currentGame = response;
+    }
 }
