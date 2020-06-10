@@ -4,15 +4,16 @@ import { inject, observer } from 'mobx-react';
 import Stores from '../../stores/storeIdentifier';
 import './index.less';
 // import signalRAspNetCoreHelper from '../../lib/signalRAspNetCoreHelper';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
-import GameStore from '../../stores/gameStore';
+import { HubConnectionBuilder } from '@aspnet/signalr';
+import { Player } from '../../models/Players/player';
+// import GameStore from '../../stores/gameStore';
 declare var abp: any;
 
-interface GameStartProps {
-    gameStore: GameStore;
-}
-const GameStart = (props: GameStartProps) => {
-    const [socket, setSocket] = useState<HubConnection>();
+// interface GameStartProps {
+//     gameStore: GameStore;
+// }
+const GameStart = (props: any) => {
+    // const [socket, setSocket] = useState<HubConnection>();
     const [game, setGame] = useState(props.gameStore.currentGame);
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const GameStart = (props: GameStartProps) => {
             props.gameStore.get(props.gameStore.currentGame.id);
         })
 
-        setSocket(connect)
+        // setSocket(connect)
     }
 
     let view;
@@ -59,7 +60,7 @@ const GameStart = (props: GameStartProps) => {
                         xl: 6,
                         xxl: 3}}
                     dataSource={game.players} 
-                    renderItem={player => (
+                    renderItem={(player: Player) => (
                         <List.Item>
                             {player.name}
                         </List.Item>
