@@ -27,7 +27,7 @@ const GameStart = (props: any) => {
 
     const initSocket = async () => {
         const connect = new HubConnectionBuilder()
-            .withUrl('http://localhost:21021/gameHub')
+            .withUrl('https://avalon-api.s0rensen.no/gameHub')
             .build()
 
         try {
