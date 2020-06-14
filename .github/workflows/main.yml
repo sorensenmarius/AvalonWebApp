@@ -32,5 +32,5 @@ jobs:
       with:
         ftp-server: ftp://waws-prod-osl-001.ftp.azurewebsites.windows.net/site/wwwroot
         ftp-username: MobileAvalon\$MobileAvalon
-        ftp-password: ${{ secrets.AZUREFTPPASSWORD }}
+        ftp-password: ${{ secrets.AZUREFTPPASSWORD }} 
         local-dir: build # This folder is NOT going to upload by default unless you add it to .git-ftp-include
