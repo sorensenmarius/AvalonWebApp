@@ -30,7 +30,7 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
-        ftp-server: ftp://ftp.domeneshop.no/avalon/
-        ftp-username: s0rensen
-        ftp-password: ${{ secrets.DOMENESHOPPASSWORD }}
+        ftp-server: ftp://waws-prod-osl-001.ftp.azurewebsites.windows.net/site/wwwroot
+        ftp-username: MobileAvalon\$MobileAvalon
+        ftp-password: ${{ secrets.AZUREFTPPASSWORD }}
         local-dir: build # This folder is NOT going to upload by default unless you add it to .git-ftp-include
