@@ -1,5 +1,5 @@
-import http from '../httpService'
-import { Game } from '../../models/Game/game';
+import http from './httpService'
+import { Game } from '../models/Game/game';
 
 class GameService {
     public async createGame(): Promise<Game> {

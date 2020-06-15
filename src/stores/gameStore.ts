@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import { Game, EmptyGame } from '../models/Game/game';
-import gameService from '../services/game/gameService';
+import gameService from '../services/gameService';
 
 
 export default class GameStore {
