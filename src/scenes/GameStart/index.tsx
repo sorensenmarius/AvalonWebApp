@@ -5,6 +5,7 @@ import Stores from '../../stores/storeIdentifier';
 import './index.less';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 import { Player } from '../../models/Players/player';
+import AppConsts from '../../lib/appconst';
 
 declare var abp: any;
 
@@ -28,7 +29,7 @@ const GameStart = (props: any) => {
 
     const initSocket = async () => {
         const connect = new HubConnectionBuilder()
-            .withUrl('https://multiplayeravalon.azurewebsites.net/gameHub')
+            .withUrl(AppConsts.remoteServiceBaseUrl + '/gameHub')
             .build()
 
         try {
@@ -38,7 +39,6 @@ const GameStart = (props: any) => {
             console.log(err)
         }
         connect.on("GameUpdated", function() {
-            console.log("Game was updated")
             props.gameStore.get(props.gameStore.currentGame.id);
         })
     }
