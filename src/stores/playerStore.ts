@@ -8,6 +8,7 @@ export default class PlayerStore {
     @action
     async createPlayer(name: string, joinCode: string) {
         let response = await playerService.createPlayer(name, joinCode)
-        return response
+        this.currentPlayer = response.player;
+        return response.game;
     }
 }
