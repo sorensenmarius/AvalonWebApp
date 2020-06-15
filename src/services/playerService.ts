@@ -1,8 +1,8 @@
 import http from './httpService'
-import { Game } from '../models/Game/game';
+import { GamePlayerDto } from './dto/gamePlayerDto';
 
 class PlayerService {
-    public async createPlayer(name: string, joinCode: string): Promise<Game> {
+    public async createPlayer(name: string, joinCode: string): Promise<GamePlayerDto> {
         let response = await http.post('api/services/app/Player/Create', {
             joinCode: joinCode,
             name: name
