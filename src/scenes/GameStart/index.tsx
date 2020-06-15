@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, List } from 'antd';
+import { Row, Col, List, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 import Stores from '../../stores/storeIdentifier';
 import './index.less';
 import { HubConnectionBuilder } from '@aspnet/signalr';
 import { Player } from '../../models/Players/player';
 import AppConsts from '../../lib/appconst';
+import { useHistory } from 'react-router-dom'
+
 
 declare var abp: any;
 
 const GameStart = (props: any) => {
     const [game, setGame] = useState(props.gameStore.currentGame);
+    const history = useHistory();
+
 
     useEffect(() => {
         (async () => {
@@ -67,6 +71,9 @@ const GameStart = (props: any) => {
                             </List.Item>
                         )}/>
                     </Col>
+                </Row>
+                <Row>
+                    <Button onClick={() => history.push("/startGame")}>Start Game</Button>
                 </Row>
             </Col>
         </Row>

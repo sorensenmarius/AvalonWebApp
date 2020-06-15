@@ -17,4 +17,28 @@ export default class GameStore {
         let response = await gameService.get(gameId);
         this.currentGame = response;
     }
+
+    @action
+    async createNewRound(){
+        let response = await gameService.createNewRound();
+        this.currentGame = response;
+    }
+
+    @action
+    async startGame(gameId: string, rollene: string[], minions: number){
+        let response = await gameService.startGame(gameId , rollene, minions);
+        this.currentGame = response;
+    }
+
+    @action
+    async assassinate(gameId: string, playerId: string){
+        let response = await gameService.assassinate(gameId , playerId);
+        this.currentGame = response;
+    }
+
+    @action
+    async gameEnd(gameId: string){
+        let response = await gameService.gameEnd(gameId);
+        this.currentGame = response;
+    }
 }
