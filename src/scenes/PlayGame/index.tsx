@@ -4,6 +4,9 @@ import { HubConnectionBuilder } from '@aspnet/signalr';
 import { inject, observer } from 'mobx-react';
 import Stores from '../../stores/storeIdentifier';
 import AppConsts from '../../lib/appconst';
+import GameStatus from '../../models/Game/gameStatus';
+import RoundStatus from '../../models/Round/roundStatus';
+import SelectingTeam from './components/SelectingTeam';
 
 const PlayGame = (props: any) => {
     const [game, setGame] = useState(props.gameStore.currentGame)
@@ -30,14 +33,22 @@ const PlayGame = (props: any) => {
             console.log(err)
         }
         connect.on("GameUpdated", function() {
-            console.log("Game was updated")
             props.gameStore.get(game.id);
         })
     }
 
 
-    return (
-        <WaitingForPlayers game={game}/>
+    return(
+        (() => {
+            if(game.gameStatus === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
+            if(game.gameStatus === GameStatus.Playing) {
+                switch(game.round.status) {
+                    case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
+                    case RoundStatus.TeamApproved: return null;
+                }
+            }
+            return null;
+        })()
     )
 }
 
