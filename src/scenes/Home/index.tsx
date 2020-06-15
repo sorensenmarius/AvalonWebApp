@@ -16,9 +16,6 @@ const Home = (props: any) => {
                 <Row>
                     <Button onClick={() => history.push("/joinGame")}>Join Game</Button>
                 </Row>
-                <Row>
-                    <Button onClick={() => history.push("/joinGame")}>Start Game</Button>
-                </Row>
             </Col>
         </Row>
     )
