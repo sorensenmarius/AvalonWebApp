@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Row, Checkbox } from 'antd';
 import { observer } from 'mobx-react';
-import './index.less'
 import { Player } from '../../../../models/Players/player';
 
 const SelectingTeam = (props: any) => {
