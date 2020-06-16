@@ -4,29 +4,11 @@ export const userRouter: any = [
   {
     path: '/',
     exact: true,
-    name: 'home',
-    title: 'Join/Create Game',
-    icon: 'play-circle',
-    showInMenu: true,
-    component: LoadableComponent(() => import('../../scenes/Home'))
-  },
-  {
-    path: '/joinGame',
-    exact: true,
     name: 'join-game',
     title: 'Join Game',
     icon: 'play-circle',
     showInMenu: true,
-    component: LoadableComponent(() => import('../../scenes/JoinGame'))
-  },
-  {
-    path: '/createGame',
-    exact: true,
-    name: 'join-game',
-    title: 'Join Game',
-    icon: 'play-circle',
-    showInMenu: true,
-    component: LoadableComponent(() => import('../../scenes/JoinGame'))
+    component: LoadableComponent(() => import('../../scenes/GameStart'))
   },
 ];
 
