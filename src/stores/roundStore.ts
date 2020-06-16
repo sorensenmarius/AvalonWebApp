@@ -14,8 +14,7 @@ export default class RoundStore {
 
     @action
     async removePlayerFromTeam(PlayerId: string, GameId: string) {
-        let response = await roundService.removePlayerFromTeam(PlayerId, GameId);
-        this.currentRound = response;
+        await roundService.removePlayerFromTeam(PlayerId, GameId);
     }
 
     @action
