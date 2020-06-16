@@ -8,9 +8,6 @@ import { Player } from '../../models/Players/player';
 import AppConsts from '../../lib/appconst';
 import { useHistory } from 'react-router-dom'
 
-
-declare var abp: any;
-
 const GameStart = (props: any) => {
     const [game, setGame] = useState(props.gameStore.currentGame);
     const history = useHistory();
@@ -20,6 +17,7 @@ const GameStart = (props: any) => {
         (async () => {
             await createGame();
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
