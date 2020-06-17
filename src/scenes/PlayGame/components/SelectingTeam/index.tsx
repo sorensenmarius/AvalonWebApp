@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Col, Row, Checkbox } from 'antd';
 import { observer } from 'mobx-react';
-import './index.less'
 import { Player } from '../../../../models/Players/player';
+import { Round } from '../../../../models/Round/round';
+import { Game } from '../../../../models/Game/game';
+interface SelectingTeamProps {
+    me: Player,
+    game: Game
+}
 
-const SelectingTeam = (props: any) => {
-    const [me] = useState(props.me)
-    const [game] = useState(props.game)
-    const [round] = useState(props.round)
+const SelectingTeam = (props: SelectingTeamProps) => {
+    const {me, game} = props;
 
     const checkedPlayer = async (e: any) => {
         console.log(e.target.checked)
@@ -17,7 +20,7 @@ const SelectingTeam = (props: any) => {
         <Row justify="center" className="selectingTeam">
             <Col sm={16} lg={8}>
                 {(() => {
-                    if(me.id === round.currentPlayer.id) {
+                    if(me.id === game.currentRound.currentPlayer.id) {
                         return(
                             <>
                                 <h2>Pick a team!</h2>
