@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import WaitingForPlayers from './components/WaitingForPlayers'
 import { HubConnectionBuilder } from '@aspnet/signalr';
 import { inject, observer } from 'mobx-react';
-import Stores from '../../stores/storeIdentifier';
-import AppConsts from '../../lib/appconst';
-import GameStatus from '../../models/Game/gameStatus';
-import RoundStatus from '../../models/Round/roundStatus';
+import Stores from '../../../stores/storeIdentifier';
+import AppConsts from '../../../lib/appconst';
+import GameStatus from '../../../models/Game/gameStatus';
+import RoundStatus from '../../../models/Round/roundStatus';
 import SelectingTeam from './components/SelectingTeam';
 
 const PlayGame = (props: any) => {
@@ -34,7 +34,6 @@ const PlayGame = (props: any) => {
             console.log(err)
         }
         connect.on("GameUpdated", function() {
-            console.log("Updated game")
             props.gameStore.get(game.id);
         })
     }

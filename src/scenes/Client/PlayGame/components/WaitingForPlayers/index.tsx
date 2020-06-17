@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, List, Row } from 'antd';
-import { Player } from '../../../../models/Players/player';
+import { Player } from '../../../../../models/Players/player';
 import { observer } from 'mobx-react';
 import './index.less'
 

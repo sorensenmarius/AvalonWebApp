@@ -1,9 +1,8 @@
 import React from 'react';
 import { Col, Row, Checkbox } from 'antd';
 import { observer } from 'mobx-react';
-import { Player } from '../../../../models/Players/player';
-import { Round } from '../../../../models/Round/round';
-import { Game } from '../../../../models/Game/game';
+import { Player } from '../../../../../models/Players/player';
+import { Game } from '../../../../../models/Game/game';
 interface SelectingTeamProps {
     me: Player,
     game: Game
@@ -11,7 +10,9 @@ interface SelectingTeamProps {
 
 const SelectingTeam = (props: SelectingTeamProps) => {
     const {me, game} = props;
-
+    console.log(game)
+    console.log(me)
+    
     const checkedPlayer = async (e: any) => {
         console.log(e.target.checked)
     }
@@ -38,7 +39,7 @@ const SelectingTeam = (props: SelectingTeamProps) => {
                         )
                     }
                     return(
-                        <h1 className="header">{ round.currentPlayer } is picking a team!</h1>
+                        <h1 className="header">{ game.currentRound.currentPlayer } is picking a team!</h1>
                     )
                 })()}
             </Col>

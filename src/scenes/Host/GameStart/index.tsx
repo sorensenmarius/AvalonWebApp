@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, List, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
-import Stores from '../../stores/storeIdentifier';
+import Stores from '../../../stores/storeIdentifier';
 import './index.less';
 import { HubConnectionBuilder } from '@aspnet/signalr';
-import { Player } from '../../models/Players/player';
-import AppConsts from '../../lib/appconst';
+import { Player } from '../../../models/Players/player';
+import AppConsts from '../../../lib/appconst';
 import { useHistory } from 'react-router-dom'
 
 const GameStart = (props: any) => {
@@ -22,7 +22,8 @@ const GameStart = (props: any) => {
 
     useEffect(() => {
         setGame(props.gameStore.currentGame)
-    }, [props.gameStore.currentGame])
+        console.log("Updated game")
+    })
 
     const createGame = async () => {
         await props.gameStore.createGame()

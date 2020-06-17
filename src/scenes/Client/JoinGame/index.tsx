@@ -1,9 +1,9 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Col, Form, Input, Row, Button } from 'antd'
-import Stores from '../../stores/storeIdentifier'
-import { Game } from '../../models/Game/game'
 import { useHistory } from 'react-router-dom'
+import { Game } from '../../../models/Game/game'
+import Stores from '../../../stores/storeIdentifier'
 
 const JoinGame = (props: any) => {
     const history = useHistory();

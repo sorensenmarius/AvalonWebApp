@@ -1,7 +1,8 @@
 import RoundStatus from './roundStatus';
-import { Player } from '../Players/player';
+import { Player, EmptyPlayer } from '../Players/player';
 
 export interface Round {
+    currentPlayer: Player;
     failedTeams: number;
     currentTeam: Player[];
     status: RoundStatus;
@@ -12,6 +13,7 @@ export interface Round {
 }
 
 export class EmptyRound implements Round {
+    currentPlayer: Player;
     failedTeams: number;
     currentTeam: Player[];
     status: RoundStatus;
@@ -21,6 +23,7 @@ export class EmptyRound implements Round {
     missionVoteBad: number;
 
     constructor() {
+        this.currentPlayer = new EmptyPlayer();
         this.failedTeams = 0
         this.currentTeam = [];
         this.status = RoundStatus.SelectingTeam;
