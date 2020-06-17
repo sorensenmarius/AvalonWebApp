@@ -7,8 +7,10 @@ import { HubConnectionBuilder } from '@aspnet/signalr';
 import { Player } from '../../../models/Players/player';
 import AppConsts from '../../../lib/appconst';
 import { useHistory } from 'react-router-dom'
+import GameSettings from './components/GameSettings';
 
 const GameStart = (props: any) => {
+    const [evilCount, setEvilCount] = useState(0);
     const [game, setGame] = useState(props.gameStore.currentGame);
     const history = useHistory();
 
@@ -21,9 +23,17 @@ const GameStart = (props: any) => {
     }, [])
 
     useEffect(() => {
-        setGame(props.gameStore.currentGame)
-        console.log("Updated game")
-    })
+        setGame(props.gameStore.currentGame);
+    }, [props.gameStore.currentGame])
+
+    useEffect(() => {
+        (async () => {
+            if(game.players.length >= 5) {
+                let n = await props.gameStore.getHowManyEvil(game.players.length);
+                setEvilCount(n);
+            };
+        })();
+    }, [game])
 
     const createGame = async () => {
         await props.gameStore.createGame()
@@ -71,7 +81,8 @@ const GameStart = (props: any) => {
                         )}/>
                     </Col>
                 </Row>
-                <Row>
+                <GameSettings game={ game } evilCount={evilCount} />
+                <Row justify="center" className="startButton">
                     <Button onClick={() => history.push("/startGame")}>Start Game</Button>
                 </Row>
             </Col>
