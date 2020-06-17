@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Col, List, Row } from 'antd';
 import { Player } from '../../../../models/Players/player';
 import { observer } from 'mobx-react';
 import './index.less'
 
 const WaitingForPlayers = (props: any) => {
-    const [game] = useState(props.game);
+    const { game } = props
 
     return(
         <Row justify="center" className="waitingForPlayers">

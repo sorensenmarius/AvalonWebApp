@@ -33,6 +33,7 @@ const PlayGame = (props: any) => {
             console.log(err)
         }
         connect.on("GameUpdated", function() {
+            console.log("Updated game")
             props.gameStore.get(game.id);
         })
     }
@@ -40,8 +41,8 @@ const PlayGame = (props: any) => {
 
     return(
         (() => {
-            if(game.gameStatus === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
-            if(game.gameStatus === GameStatus.Playing) {
+            if(game.status === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
+            if(game.status === GameStatus.Playing) {
                 switch(game.round.status) {
                     case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
                     case RoundStatus.TeamApproved: return null;
