@@ -1,5 +1,6 @@
 import GameStatus from './gameStatus';
 import { Player } from '../Players/player';
+import { Round, EmptyRound } from '../Round/round';
 
 export interface Game {
     id: string;
@@ -7,6 +8,7 @@ export interface Game {
     players: Player[];
     gameStatus: GameStatus;
     creationTime: Date;
+    currentRound: Round;
 }
 
 export class EmptyGame implements Game {
@@ -15,6 +17,7 @@ export class EmptyGame implements Game {
     players: Player[];
     gameStatus: GameStatus;
     creationTime: Date;
+    currentRound: Round;
 
     constructor() {
         this.id = '';
@@ -22,5 +25,6 @@ export class EmptyGame implements Game {
         this.players = [];
         this.gameStatus = GameStatus.WaitingForPlayers;
         this.creationTime = new Date();
+        this.currentRound = new EmptyRound();
     }
 }

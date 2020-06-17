@@ -10,24 +10,24 @@ export const userRouter: any = [
     showInMenu: true,
     component: LoadableComponent(() => import('../../scenes/Home'))
   },
-  {
-    path: '/joinGame',
-    exact: true,
-    name: 'join-game',
-    title: 'Join Game',
-    icon: 'play-circle',
-    showInMenu: true,
-    component: LoadableComponent(() => import('../../scenes/JoinGame'))
-  },
-  {
-    path: '/createGame',
-    exact: true,
-    name: 'join-game',
-    title: 'Join Game',
-    icon: 'play-circle',
-    showInMenu: true,
-    component: LoadableComponent(() => import('../../scenes/JoinGame'))
-  },
+  // {
+  //   path: '/joinGame',
+  //   exact: true,
+  //   name: 'join-game',
+  //   title: 'Join Game',
+  //   icon: 'play-circle',
+  //   showInMenu: true,
+  //   component: LoadableComponent(() => import('../../scenes/JoinGame'))
+  // },
+  // {
+  //   path: '/createGame',
+  //   exact: true,
+  //   name: 'join-game',
+  //   title: 'Join Game',
+  //   icon: 'play-circle',
+  //   showInMenu: true,
+  //   component: LoadableComponent(() => import('../../scenes/JoinGame'))
+  // },
 ];
 
 export const appRouters: any = [
