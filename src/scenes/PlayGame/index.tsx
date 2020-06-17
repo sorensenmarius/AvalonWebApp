@@ -15,11 +15,12 @@ const PlayGame = (props: any) => {
         (async () => {
             await initSocket();
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         setGame(props.gameStore.currentGame)
-    })
+    }, [props.gameStore.currentGame])
 
     const initSocket = async () => {
         const connect = new HubConnectionBuilder()
