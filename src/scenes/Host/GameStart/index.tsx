@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, List, Button } from 'antd';
+import { Row, Col, List } from 'antd';
 import { inject, observer } from 'mobx-react';
 import Stores from '../../../stores/storeIdentifier';
 import './index.less';
-import { HubConnectionBuilder } from '@aspnet/signalr';
 import { Player } from '../../../models/Players/player';
-import AppConsts from '../../../lib/appconst';
-import { useHistory } from 'react-router-dom'
 import GameSettings from './components/GameSettings';
 
 const GameStart = (props: any) => {
     const [evilCount, setEvilCount] = useState(0);
     const [game, setGame] = useState(props.gameStore.currentGame);
-    const history = useHistory();
-
-
-    useEffect(() => {
-        (async () => {
-            await createGame();
-        })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     useEffect(() => {
         setGame(props.gameStore.currentGame);
@@ -34,27 +22,6 @@ const GameStart = (props: any) => {
             };
         })();
     }, [game])
-
-    const createGame = async () => {
-        await props.gameStore.createGame()
-        await initSocket()
-    }
-
-    const initSocket = async () => {
-        const connect = new HubConnectionBuilder()
-            .withUrl(AppConsts.remoteServiceBaseUrl + '/gameHub')
-            .build()
-
-        try {
-            await connect.start()
-            connect.invoke("JoinGameGroup", props.gameStore.currentGame.id)
-        } catch(err) {
-            console.log(err)
-        }
-        connect.on("GameUpdated", function() {
-            props.gameStore.get(props.gameStore.currentGame.id);
-        })
-    }
 
     return(
         <Row justify="center">
@@ -82,9 +49,6 @@ const GameStart = (props: any) => {
                     </Col>
                 </Row>
                 <GameSettings game={ game } evilCount={evilCount} />
-                <Row justify="center" className="startButton">
-                    <Button onClick={() => history.push("/startGame")}>Start Game</Button>
-                </Row>
             </Col>
         </Row>
     )
