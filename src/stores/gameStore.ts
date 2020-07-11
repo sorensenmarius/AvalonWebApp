@@ -41,4 +41,9 @@ export default class GameStore {
         let response = await gameService.gameEnd(gameId);
         this.currentGame = response;
     }
+
+    @action
+    async getHowManyEvil(n: number) {
+        return await gameService.getHowManyEvil(n);
+    }
 }

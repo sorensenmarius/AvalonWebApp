@@ -34,6 +34,10 @@ class GameService {
         let response = await http.post('api/services/app/Game/GameEnd', { params: {id: gameId} });
         return response.data.result;
     }
+    public async getHowManyEvil(n: number): Promise<number> {
+        let response = await http.get('api/services/app/Game/GetHowManyEvils', { params: {howManyPlayers: n} })
+        return response.data.result;
+    }
 }
 
 export default new GameService()

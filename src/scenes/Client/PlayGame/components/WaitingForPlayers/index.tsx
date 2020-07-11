@@ -11,7 +11,15 @@ const WaitingForPlayers = (props: any) => {
         <Row justify="center" className="waitingForPlayers">
             <Col sm={16} lg={8}>
                 <h1 className="header">Waiting for players</h1>
-                <List
+                <List                        
+                    grid={{
+                        gutter: 16,
+                        xs: 1,
+                        sm: 2,
+                        md: 4,
+                        lg: 4,
+                        xl: 6,
+                        xxl: 3}}
                     dataSource={game.players}
                     renderItem={(item: Player) => (
                         <List.Item>

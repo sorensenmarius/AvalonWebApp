@@ -11,10 +11,10 @@ const Home = (props: any) => {
         <Row justify="center">
             <Col>
                 <Row>
-                    <Button onClick={() => history.push("/createGame")}>Create Game</Button>
+                    <Button onClick={() => history.push("/host")}>Create Game</Button>
                 </Row>
                 <Row>
-                    <Button onClick={() => history.push("/joinGame")}>Join Game</Button>
+                    <Button onClick={() => history.push("/play")}>Join Game</Button>
                 </Row>
             </Col>
         </Row>
