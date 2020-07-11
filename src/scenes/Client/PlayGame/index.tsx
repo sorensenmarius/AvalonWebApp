@@ -7,9 +7,10 @@ import AppConsts from '../../../lib/appconst';
 import GameStatus from '../../../models/Game/gameStatus';
 import RoundStatus from '../../../models/Round/roundStatus';
 import SelectingTeam from './components/SelectingTeam';
+import { Game } from '../../../models/Game/game';
 
 const PlayGame = (props: any) => {
-    const [game, setGame] = useState(props.gameStore.currentGame)
+    const [game, setGame] = useState<Game>(props.gameStore.currentGame)
     
     useEffect(() => {
         (async () => {
@@ -43,8 +44,9 @@ const PlayGame = (props: any) => {
         (() => {
             if(game.status === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
             if(game.status === GameStatus.Playing) {
-                switch(game.round.status) {
+                switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
+                    case RoundStatus.VotingForTeam: return <h1>VI KLARER DET!!!!!</h1>
                     case RoundStatus.TeamApproved: return null;
                 }
             }
