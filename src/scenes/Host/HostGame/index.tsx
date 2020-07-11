@@ -51,6 +51,7 @@ const HostGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <HostSelectingTeam game={game} />
+                    case RoundStatus.VotingForTeam: return <h1>ÅÅÅÅÅÅÅ shit må stemme nå</h1>
                     case RoundStatus.TeamApproved: return null;
                 }
             }

@@ -39,4 +39,9 @@ export default class RoundStore {
         let response = await roundService.expeditionResults(GameId);
         this.currentRound = response;
     }
+
+    @action
+    async submitTeam(GameId: string) {
+        await roundService.submitTeam(GameId);
+    }
 }

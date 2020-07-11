@@ -46,6 +46,7 @@ const PlayGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
+                    case RoundStatus.VotingForTeam: return <h1>VI KLARER DET!!!!!</h1>
                     case RoundStatus.TeamApproved: return null;
                 }
             }

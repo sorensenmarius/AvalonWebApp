@@ -45,6 +45,12 @@ class RoundService {
         });
         return response.data.result;
     }
+
+    public async submitTeam(GameId: string): Promise<void> {
+        await http.post('api/services/app/Round/submitTeam', {
+            GameId: GameId
+        })
+    }
 }
 
 export default new RoundService()

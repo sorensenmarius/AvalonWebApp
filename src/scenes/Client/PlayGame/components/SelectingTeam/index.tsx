@@ -1,5 +1,5 @@
-import React from 'react';
-import { Col, Row, Checkbox } from 'antd';
+import React, { useState } from 'react';
+import { Col, Row, Checkbox, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { Player } from '../../../../../models/Players/player';
 import { Game } from '../../../../../models/Game/game';
@@ -15,14 +15,23 @@ interface SelectingTeamProps {
 
 const SelectingTeam = (props: SelectingTeamProps) => {
     const {me, game, roundStore} = props;
+    const [players] = useState<Player[]>(game.players)
     
     const checkedPlayer = async (playerId: string) => {
-        console.log(game)
         if(game.currentRound.currentTeam && game.currentRound.currentTeam.some(p => p.id === playerId)) {
+            game.currentRound.currentTeam.splice(game.currentRound.currentTeam.findIndex(p => p.id === playerId), 1)
             roundStore?.removePlayerFromTeam(playerId, game.id)
         } else {
+            const tempPlayer = game.players.find(p => p.id === playerId)
+            if(tempPlayer) {
+                game.currentRound.currentTeam.push(tempPlayer)
+            }
             roundStore?.addPlayerToTeam(playerId, game.id)
         }
+    }
+
+    const submitTeam = async () => {
+        props.roundStore?.submitTeam(game.id);
     }
 
     return(
@@ -34,13 +43,17 @@ const SelectingTeam = (props: SelectingTeamProps) => {
                             <>
                                 <h2>Pick a team!</h2>
                                 <h3>You need X players for this mission.</h3>
-                                {game.players.map((p: Player) => 
-                                    <Row justify="center">
-                                        <Checkbox key={p.id} onChange={() => checkedPlayer(p.id)}>
+                                {players.map((p: Player) => 
+                                    <Row justify="center" key={p.id}>
+                                        <Checkbox 
+                                            onChange={() => checkedPlayer(p.id)}
+                                            checked={game.currentRound.currentTeam.some((item: Player) => item.id === p.id)}
+                                        >
                                             {p.name}
                                         </Checkbox>
                                     </Row>
                                 )}
+                                <Button onClick={submitTeam}>Submit Team</Button>
                             </>
                         )
                     }
