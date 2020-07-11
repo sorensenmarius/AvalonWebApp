@@ -8,8 +8,7 @@ export default class RoundStore {
 
     @action
     async addPlayerToTeam(PlayerId: string, GameId: string) {
-        let response = await roundService.addPlayerToTeam(PlayerId, GameId);
-        this.currentRound = response;
+        await roundService.addPlayerToTeam(PlayerId, GameId);
     }
 
     @action

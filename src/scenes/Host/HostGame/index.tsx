@@ -6,9 +6,11 @@ import AppConsts from '../../../lib/appconst';
 import GameStatus from '../../../models/Game/gameStatus';
 import RoundStatus from '../../../models/Round/roundStatus';
 import GameStart from '../GameStart';
+import { Game } from '../../../models/Game/game';
+import HostSelectingTeam from './components/HostSelectingTeam';
 
 const HostGame = (props: any) => {
-    const [game, setGame] = useState(props.gameStore.currentGame);
+    const [game, setGame] = useState<Game>(props.gameStore.currentGame);
 
     useEffect(() => {
         setGame(props.gameStore.currentGame);
@@ -47,8 +49,8 @@ const HostGame = (props: any) => {
         (() => {
             if(game.status === GameStatus.WaitingForPlayers) return <GameStart game={game}/>
             if(game.status === GameStatus.Playing) {
-                switch(game.round.status) {
-                    // case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
+                switch(game.currentRound.status) {
+                    case RoundStatus.SelectingTeam: return <HostSelectingTeam game={game} />
                     case RoundStatus.TeamApproved: return null;
                 }
             }

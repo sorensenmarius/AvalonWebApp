@@ -13,11 +13,11 @@ class GameService {
     }
 
     public async startGame(gameId: string, rollene: string[], minions: number): Promise<Game> {
-        let response = await http.post('api/services/app/Game/StartGame', { params: 
-            {   id: gameId,
-                rollene: rollene,
+        let response = await http.post('api/services/app/Game/StartGame', { 
+                id: gameId,
+                roles: rollene,
                 minions: minions
-            } })
+            })
         return response.data.result;
     } 
 

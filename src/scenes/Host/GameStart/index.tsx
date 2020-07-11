@@ -28,24 +28,25 @@ const GameStart = (props: any) => {
             <Col sm={24} lg={16} xl={10}>
                 <Row justify="center" className="createGameView">
                     <Col>
-                    <h3>Join the game on your device with this code:</h3>
-                    <h1>{game.joinCode}</h1>
-                    <h3>Current Players:</h3>
-                    <List
-                        grid={{
-                            gutter: 16,
-                            xs: 1,
-                            sm: 2,
-                            md: 4,
-                            lg: 4,
-                            xl: 6,
-                            xxl: 3}}
-                        dataSource={game.players} 
-                        renderItem={(player: Player) => (
-                            <List.Item>
-                                {player.name}
-                            </List.Item>
-                        )}/>
+                        <h3>Join the game on your device with this code:</h3>
+                        <h1>{game.joinCode}</h1>
+                        <h3>Current Players:</h3>
+                        <List
+                            grid={{
+                                gutter: 16,
+                                xs: 1,
+                                sm: 2,
+                                md: 4,
+                                lg: 4,
+                                xl: 6,
+                                xxl: 3}}
+                            dataSource={game.players} 
+                            renderItem={(player: Player) => (
+                                <List.Item>
+                                    {player.name}
+                                </List.Item>
+                            )}
+                        />
                     </Col>
                 </Row>
                 <GameSettings game={ game } evilCount={evilCount} />

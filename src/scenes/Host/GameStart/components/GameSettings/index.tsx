@@ -17,9 +17,6 @@ const GameSettings = (props: any) => {
     const history = useHistory();
     
     const handleCheck = (e: any) => {
-        // TODO - FIX BUG
-        // First item added to list is somehow removed before the second item is added.
-        // Subsequent items are added and removed from list correctly
         if(e.target.checked) {
             if(e.target.id <= 3) {
                 setGoodRoles([...goodRoles, e.target.id])
@@ -40,7 +37,8 @@ const GameSettings = (props: any) => {
     }
 
     const startGame = async () => {
-        await gameStore.startGame(game.id, [...goodRoles, ...evilRoles], 2)
+        let minions = evilCount - evilRoles.length
+        await gameStore.startGame(game.id, [...goodRoles, ...evilRoles], minions)
         history.push("/host")
     }
 
