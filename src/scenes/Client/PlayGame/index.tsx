@@ -8,6 +8,7 @@ import GameStatus from '../../../models/Game/gameStatus';
 import RoundStatus from '../../../models/Round/roundStatus';
 import SelectingTeam from './components/SelectingTeam';
 import { Game } from '../../../models/Game/game';
+import Voting from './components/Voting';
 
 const PlayGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame)
@@ -46,7 +47,7 @@ const PlayGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
-                    case RoundStatus.VotingForTeam: return <h1>VI KLARER DET!!!!!</h1>
+                    case RoundStatus.VotingForTeam: return <Voting expedition={false} me={props.playerStore.currentPlayer} game={game}/>
                     case RoundStatus.TeamApproved: return null;
                 }
             }

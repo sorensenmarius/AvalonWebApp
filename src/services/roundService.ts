@@ -14,7 +14,7 @@ class RoundService {
         await http.delete('api/services/app/Round/RemovePlayerFromTeam', {params: {PlayerId: PlayerId, GameId: GameId}});
     }
 
-    public async voteForTeam(PlayerId: string, GameId: string, Vote: boolean): Promise<Round> {
+    public async voteForTeam(PlayerId: string, GameId: string, Vote: Boolean): Promise<Round> {
         let response = await http.post('api/services/app/Round/VoteForTeam', {
             PlayerId: PlayerId,
             GameId: GameId,
@@ -23,7 +23,7 @@ class RoundService {
         return response.data.result;
     }
 
-    public async expeditonVote(PlayerId: string, GameId: string, Vote: boolean): Promise<Round> {
+    public async expeditonVote(PlayerId: string, GameId: string, Vote: Boolean): Promise<Round> {
         let response = await http.post('api/services/app/Round/ExpeditonVote', {
             PlayerId: PlayerId,     
             GameId: GameId,

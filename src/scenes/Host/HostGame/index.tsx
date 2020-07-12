@@ -8,6 +8,8 @@ import RoundStatus from '../../../models/Round/roundStatus';
 import GameStart from '../GameStart';
 import { Game } from '../../../models/Game/game';
 import HostSelectingTeam from './components/HostSelectingTeam';
+import HostVoting from './components/HostVoting';
+import HostTeamVoteResult from './components/HostTeamVoteResult';
 
 const HostGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame);
@@ -51,8 +53,9 @@ const HostGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <HostSelectingTeam game={game} />
-                    case RoundStatus.VotingForTeam: return <h1>ÅÅÅÅÅÅÅ shit må stemme nå</h1>
-                    case RoundStatus.TeamApproved: return null;
+                    case RoundStatus.VotingForTeam: return <HostVoting expedition={false} game={game} />
+                    case RoundStatus.TeamApproved: return <HostTeamVoteResult accepted={true} game={game}/>;
+                    case RoundStatus.TeamDenied: return <HostTeamVoteResult accepted={false} game={game}/>;
                 }
             }
             return null;
