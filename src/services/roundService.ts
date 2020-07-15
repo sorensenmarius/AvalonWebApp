@@ -2,16 +2,11 @@ import http from './httpService'
 import { Round } from '../models/Round/round';
 
 class RoundService {
-    public async addPlayerToTeam(PlayerId: string, GameId: string): Promise<Round> {
-        let response = await http.post('api/services/app/Round/AddPlayerToTeam', {
-            PlayerId: PlayerId,
-            GameId: GameId
-        });
-        return response.data.result;
-    }
-
-    public async removePlayerFromTeam(PlayerId: string, GameId: string){
-        await http.delete('api/services/app/Round/RemovePlayerFromTeam', {params: {PlayerId: PlayerId, GameId: GameId}});
+    public async setTeam(GameId: string, CurrentTeam: string[]): Promise<void> {
+        await http.post('api/services/app/Round/SetTeam', {
+            GameId,
+            CurrentTeam
+        })
     }
 
     public async voteForTeam(PlayerId: string, GameId: string, Vote: Boolean): Promise<Round> {

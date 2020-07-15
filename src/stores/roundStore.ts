@@ -7,13 +7,8 @@ export default class RoundStore {
     @observable currentRound: Round = new EmptyRound();
 
     @action
-    async addPlayerToTeam(PlayerId: string, GameId: string) {
-        await roundService.addPlayerToTeam(PlayerId, GameId);
-    }
-
-    @action
-    async removePlayerFromTeam(PlayerId: string, GameId: string) {
-        await roundService.removePlayerFromTeam(PlayerId, GameId);
+    async setTeam(GameId: string, CurrentTeam: string[]): Promise<void> {
+        await roundService.setTeam(GameId, CurrentTeam);
     }
 
     @action
