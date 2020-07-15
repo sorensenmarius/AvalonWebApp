@@ -8,7 +8,8 @@ import GameStatus from '../../../models/Game/gameStatus';
 import RoundStatus from '../../../models/Round/roundStatus';
 import SelectingTeam from './components/SelectingTeam';
 import { Game } from '../../../models/Game/game';
-import Voting from './components/Voting';
+import VotingForTeam from './components/VotingForTeam';
+import ExpeditionVote from './components/ExpeditionVote';
 
 const PlayGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame)
@@ -36,6 +37,7 @@ const PlayGame = (props: any) => {
             console.log(err)
         }
         connect.on("GameUpdated", function() {
+            console.log("Game was updated")
             props.gameStore.get(game.id);
         })
     }
@@ -47,8 +49,8 @@ const PlayGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
-                    case RoundStatus.VotingForTeam: return <Voting expedition={false} me={props.playerStore.currentPlayer} game={game}/>
-                    case RoundStatus.TeamApproved: return null;
+                    case RoundStatus.VotingForTeam: return <VotingForTeam me={props.playerStore.currentPlayer} game={game}/>
+                    case RoundStatus.TeamApproved: return <ExpeditionVote me={props.playerStore.currentPlayer} game={game}/>;
                 }
             }
             return null;
