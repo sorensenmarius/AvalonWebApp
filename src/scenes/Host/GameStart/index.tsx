@@ -24,8 +24,8 @@ const GameStart = (props: any) => {
     }, [game])
 
     return(
-        <Row justify="center">
-            <Col sm={24} lg={16} xl={10}>
+        <Row id = "main" justify="center">
+            <Col sm={24}>
                 <Row justify="center" className="createGameView">
                     <Col>
                         <h3>Join the game on your device with this code:</h3>

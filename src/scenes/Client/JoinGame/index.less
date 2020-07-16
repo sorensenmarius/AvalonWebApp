@@ -1,33 +1,46 @@
-.centerContent {
-    text-align: center;
-}
-.fadein {
-    filter: brightness(100%);
-    transition: filter 1s, box-shadow 1s;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-
+#bg {
+    width: 100%;
+    height: 100%;
+    background: url("https://images2.alphacoders.com/486/thumb-1920-486587.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    -webkit-animation: myfirst 2s ; /* Chrome, Safari, Opera */
+    animation: myfirst 2s ;
   }
-  .fadein.is-active {
-    opacity: 1;
-    transition: all ease 0.65s;
+  .Formen{
+      margin-top: 35%;
   }
-  .fade {
-    filter: brightness(30%);
-    border-radius: 10px;
-    transition: filter 1s, box-shadow 1s;
-
-  }
-  .Cards{
+ 
+  .inputfield{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    width: 70%;
     border: none;
-  }
-  #GodButton{
-    position: fixed;
-    top: 70%;
-  }
-  .RedSpan{
-    color: red;
+    opacity: 1;
+    background-color: transparent;
+    padding-right: 5px;
+    border-bottom: 2px solid black;
   }
 
+  #buttoninvis{
+    visibility: hidden;
+  }
+ #realButton{
+    visibility: visible;
+ }
+  /* Chrome, Safari, Opera */
+  @-webkit-keyframes myfirst {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  /* Standard syntax */
+  @keyframes myfirst {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
   .button,
 .button:hover .content,
 .button:after,
