@@ -7,23 +7,19 @@ export default class RoundStore {
     @observable currentRound: Round = new EmptyRound();
 
     @action
-    async addPlayerToTeam(PlayerId: string, GameId: string) {
-        await roundService.addPlayerToTeam(PlayerId, GameId);
+    async setTeam(GameId: string, CurrentTeam: string[]): Promise<void> {
+        await roundService.setTeam(GameId, CurrentTeam);
     }
 
     @action
-    async removePlayerFromTeam(PlayerId: string, GameId: string) {
-        await roundService.removePlayerFromTeam(PlayerId, GameId);
-    }
-
-    @action
-    async voteForTeam(PlayerId: string, GameId: string, Vote: boolean) {
+    async voteForTeam(PlayerId: string, GameId: string, Vote: Boolean) {
         let response = await roundService.voteForTeam(PlayerId, GameId, Vote);
         this.currentRound = response;
+        return response
     }
 
     @action
-    async expeditonVote(PlayerId: string, GameId: string, Vote: boolean) {
+    async expeditonVote(PlayerId: string, GameId: string, Vote: Boolean) {
         let response = await roundService.expeditonVote(PlayerId, GameId, Vote);
         this.currentRound = response;
     }

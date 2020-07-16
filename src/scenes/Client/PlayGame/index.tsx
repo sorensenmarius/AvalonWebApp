@@ -8,6 +8,9 @@ import GameStatus from '../../../models/Game/gameStatus';
 import RoundStatus from '../../../models/Round/roundStatus';
 import SelectingTeam from './components/SelectingTeam';
 import { Game } from '../../../models/Game/game';
+import VotingForTeam from './components/VotingForTeam';
+import Loader from './components/Loader';
+// import ExpeditionVote from './components/ExpeditionVote';
 
 const PlayGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame)
@@ -30,11 +33,11 @@ const PlayGame = (props: any) => {
 
         try {
             await connect.start()
-            connect.invoke("JoinGameGroup", game.id)
+            await connect.invoke("JoinAllGroup", game.id)
         } catch(err) {
             console.log(err)
         }
-        connect.on("GameUpdated", function() {
+        connect.on("UpdateAll", function() {
             props.gameStore.get(game.id);
         })
     }
@@ -46,8 +49,11 @@ const PlayGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
-                    case RoundStatus.VotingForTeam: return <h1>VI KLARER DET!!!!!</h1>
-                    case RoundStatus.TeamApproved: return null;
+                    case RoundStatus.VotingForTeam: return <VotingForTeam me={props.playerStore.currentPlayer} game={game}/>
+                    case RoundStatus.TeamApproved: return <Loader />;
+                    case RoundStatus.TeamDenied: return <Loader />;
+                    case RoundStatus.MissionSuccess: return <Loader />;
+                    case RoundStatus.MissionFailed: return <Loader />;
                 }
             }
             return null;

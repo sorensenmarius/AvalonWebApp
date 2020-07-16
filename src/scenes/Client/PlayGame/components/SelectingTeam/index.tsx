@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row, Checkbox, Button } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { Player } from '../../../../../models/Players/player';
@@ -16,17 +16,20 @@ interface SelectingTeamProps {
 const SelectingTeam = (props: SelectingTeamProps) => {
     const {me, game, roundStore} = props;
     const [players] = useState<Player[]>(game.players)
+    const [currentTeam, setCurrentTeam] = useState<string[]>([])
     
+    useEffect(() => {
+        roundStore?.setTeam(game.id, currentTeam)
+    }, [currentTeam])
+
     const checkedPlayer = async (playerId: string) => {
-        if(game.currentRound.currentTeam && game.currentRound.currentTeam.some(p => p.id === playerId)) {
-            game.currentRound.currentTeam.splice(game.currentRound.currentTeam.findIndex(p => p.id === playerId), 1)
-            roundStore?.removePlayerFromTeam(playerId, game.id)
+        if (currentTeam.includes(playerId)) {
+            console.log(currentTeam.filter((id: string) => id !== playerId))
+            setCurrentTeam(currentTeam.filter((id: string) => id !== playerId))
         } else {
-            const tempPlayer = game.players.find(p => p.id === playerId)
-            if(tempPlayer) {
-                game.currentRound.currentTeam.push(tempPlayer)
-            }
-            roundStore?.addPlayerToTeam(playerId, game.id)
+            var tmp = [...currentTeam]
+            tmp.push(playerId)
+            setCurrentTeam(tmp)
         }
     }
 
@@ -47,7 +50,7 @@ const SelectingTeam = (props: SelectingTeamProps) => {
                                     <Row justify="center" key={p.id}>
                                         <Checkbox 
                                             onChange={() => checkedPlayer(p.id)}
-                                            checked={game.currentRound.currentTeam.some((item: Player) => item.id === p.id)}
+                                            checked={currentTeam.some((id: string) => id === p.id)}
                                         >
                                             {p.name}
                                         </Checkbox>

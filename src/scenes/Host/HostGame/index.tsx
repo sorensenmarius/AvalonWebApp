@@ -8,12 +8,17 @@ import RoundStatus from '../../../models/Round/roundStatus';
 import GameStart from '../GameStart';
 import { Game } from '../../../models/Game/game';
 import HostSelectingTeam from './components/HostSelectingTeam';
+import HostVoting from './components/HostVoting';
+import HostTeamVoteResult from './components/HostTeamVoteResult';
+import HostExpeditionResult from './components/HostExpeditionResult';
 
 const HostGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame);
 
     useEffect(() => {
+        console.log(props.gameStore.currentGame)
         setGame(props.gameStore.currentGame);
+        console.log(game)
     }, [props.gameStore.currentGame])
     
     useEffect(() => {
@@ -35,11 +40,15 @@ const HostGame = (props: any) => {
 
         try {
             await connect.start()
-            connect.invoke("JoinGameGroup", props.gameStore.currentGame.id)
+            await connect.invoke("JoinAllGroup", props.gameStore.currentGame.id)
+            await connect.invoke("JoinHostGroup", props.gameStore.currentGame.id)
         } catch(err) {
             console.log(err)
         }
-        connect.on("GameUpdated", function() {
+        connect.on("UpdateAll", function() {
+            props.gameStore.get(props.gameStore.currentGame.id);
+        })
+        connect.on("UpdateHost", function () {
             props.gameStore.get(props.gameStore.currentGame.id);
         })
     }
@@ -51,8 +60,11 @@ const HostGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <HostSelectingTeam game={game} />
-                    case RoundStatus.VotingForTeam: return <h1>ÅÅÅÅÅÅÅ shit må stemme nå</h1>
-                    case RoundStatus.TeamApproved: return null;
+                    case RoundStatus.VotingForTeam: return <HostVoting expedition={false} game={game} />
+                    case RoundStatus.TeamApproved: return <HostTeamVoteResult accepted={true} game={game} key="teamVoteSuccessful"/>;
+                    case RoundStatus.TeamDenied: return <HostTeamVoteResult accepted={false} game={game} key="teamVoteFailed"/>;
+                    case RoundStatus.MissionSuccess: return <HostExpeditionResult accepted={true} game={game} key="expeditionSuccessful" />;
+                    case RoundStatus.MissionFailed: return <HostExpeditionResult accepted={false} game={game} key="expeditionFailed"/>;
                 }
             }
             return null;
