@@ -1,15 +1,31 @@
-import React from 'react'
-import {observer } from 'mobx-react';
+import React, { useState, useEffect } from 'react'
+import {observer, inject } from 'mobx-react';
 import { Game } from '../../../../../models/Game/game';
 import { Row, Col } from 'antd';
+import Stores from '../../../../../stores/storeIdentifier';
+import GameStore from '../../../../../stores/gameStore';
 
 interface HostExpeditionResultProps {
     game: Game
     accepted: Boolean
+    gameStore?: GameStore
 }
 
 const HostExpeditionResult = (props: HostExpeditionResultProps) => {
-    const { accepted, game } = props;
+    const { accepted, game, gameStore } = props;
+    const [seconds, setSeconds] = useState(2000)
+
+    useEffect(() => {
+        setTimeout(nextScreen, seconds * 10)
+        const interval = setInterval(() => {
+            setSeconds(seconds => seconds - 1)
+        }, 10)
+        return () => clearInterval(interval)
+    }, [])
+
+    const nextScreen = async () => {
+        gameStore?.nextRound(game.id);
+    }
 
     return(
         <Row
@@ -53,4 +69,4 @@ const HostExpeditionResult = (props: HostExpeditionResultProps) => {
     )
 }
 
-export default observer(HostExpeditionResult);
+export default inject(Stores.GameStore)(observer(HostExpeditionResult));

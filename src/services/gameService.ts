@@ -38,6 +38,11 @@ class GameService {
         let response = await http.get('api/services/app/Game/GetHowManyEvils', { params: {howManyPlayers: n} })
         return response.data.result;
     }
+    public async nextRound(gameId: string): Promise<void> {
+        await http.post('api/services/app/Game/NextRound', {
+            GameId: gameId
+        })
+    }
 }
 
 export default new GameService()

@@ -13,7 +13,27 @@ const HostVoting = (props: HostVotingProps) => {
 
     if(expedition) {
         return(
-            <h1>Voting for expedition</h1>
+            <Row justify="center">
+                <Col>
+                    <h1>These players are on a mission</h1>
+                    <List
+                        grid={{
+                            gutter: 16,
+                            xs: 1,
+                            sm: 2,
+                            md: 4,
+                            lg: 4,
+                            xl: 6,
+                            xxl: 3}}
+                        dataSource={game.currentRound.currentTeam}
+                        renderItem={(p: Player) => (
+                            <List.Item>
+                                <span>{ p.name }</span>
+                            </List.Item>
+                        )}
+                    />
+                </Col>
+            </Row>
         )
     } else {
         return(
