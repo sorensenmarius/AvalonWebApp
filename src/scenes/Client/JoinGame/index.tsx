@@ -18,6 +18,8 @@ const JoinGame = (props: any) => {
     
     return(
         <Row  id = "bg" justify="center">
+           {/*   <div id = "BackgroundContainer">
+            </div>  */} 
             <Col sm={16} lg={8}>
                 <Form className = "Formen"
                     onFinish={join}>
@@ -26,7 +28,7 @@ const JoinGame = (props: any) => {
                         className = "Formitems"
                     >
                         <div className ="InputContainer">
-                            <img src="/images/orangejoin.png" alt="" width = "200px" />
+                            <img src="/images/frozen4.png" alt="" width = "300px" />
                             <Input className="inputfield" placeholder="Join Code" />
                         </div>
                         
@@ -37,7 +39,7 @@ const JoinGame = (props: any) => {
 
                     >
                         <div className = "InputContainer">
-                            <img src="/images/Nickname.png" alt="" width = "200px" />
+                            <img src="/images/fnick1.png" alt="" width = "300px" />
                             <Input className="inputfield" placeholder = "Nickname"/>
                         </div>
                         

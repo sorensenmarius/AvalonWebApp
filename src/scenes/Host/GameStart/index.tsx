@@ -25,9 +25,10 @@ const GameStart = (props: any) => {
 
     return(
         <Row id = "main" justify="center">
+            <div id= "Backgroundtest"></div>
             <Col sm={24}>
                 <Row justify="center" className="createGameView">
-                    <Col>
+                    <Col id = "PlayerJoin">
                         <h3>Join the game on your device with this code:</h3>
                         <h1>{game.joinCode}</h1>
                         <h3>Current Players:</h3>

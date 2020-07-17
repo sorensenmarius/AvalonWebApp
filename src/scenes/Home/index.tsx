@@ -32,6 +32,11 @@ const Home = (props: any) => {
 
     return(
         <Row id = "HomeScreen" justify="center" >
+            <div id = "Title">
+                <Row justify="center"> 
+                    <h1 id = "AvalonText">Avalon</h1>
+                </Row>
+            </div>
             <div id = "buttonContainer">
                 <Col>
                     <Row>
@@ -46,11 +51,7 @@ const Home = (props: any) => {
                     </Row>
                 </Col>
             </div>
-            <div id = "Title">
-                <Row justify="center"> 
-                    <h1 id = "AvalonText">Avalon</h1>
-                </Row>
-            </div>
+            
         </Row>
     )
 }

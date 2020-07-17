@@ -1,5 +1,9 @@
 .centerContent {
     text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    z-index: 10;
+    
 }
 .fadein {
     filter: brightness(100%);
@@ -12,17 +16,38 @@
     transition: all ease 0.65s;
   }
   .fade {
-    filter: brightness(30%);
+    filter: brightness(25%);
     border-radius: 10px;
     transition: filter 1s, box-shadow 1s;
 
   }
+ /*  #BackgroundContainer{
+    background-color: white;
+    border-radius: 20%;
+    opacity: 0.1;
+    z-index: 0;
+    width: 60%;
+    height: 90%;
+    bottom: 5%;
+    position: absolute;
+  } */
   .Cards{
     border: none;
+    border-radius: 4%;
+    opacity: 1;
+    margin-left: 0;
+    right: 10%;
+  }
+  #EvilCols{
+    margin-left: 0;
+    padding-left: 0;
+  }
+  #GoodRoles{
+    left: 50%;
   }
   #GodButton{
     position: fixed;
-    top: 70%;
+    top: 85%;
   }
   .RedSpan{
     color: red;
@@ -58,7 +83,6 @@
     background-position: 0px 0px;
     z-index: 1;
 }
-
 .ros.button {
     color: #70a0a0;
 }
@@ -98,4 +122,8 @@
 .button:after {
     right: -2px;
     background-position: 0px -162px;
+}
+#app{
+  margin-left: 100px;
+  background-color: transparent;
 }
