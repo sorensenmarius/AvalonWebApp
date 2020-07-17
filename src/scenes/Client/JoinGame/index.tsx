@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Col, Form, Input, Row, Button } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { Game } from '../../../models/Game/game'
 import Stores from '../../../stores/storeIdentifier'
+import './index.less';
+
 
 const JoinGame = (props: any) => {
     const history = useHistory();
@@ -13,29 +15,41 @@ const JoinGame = (props: any) => {
         await props.gameStore.get(g.id);
         history.push("/playGame")
     }
-
-
+    
     return(
-        <Row justify="center">
+        <Row  id = "bg" justify="center">
+           {/*   <div id = "BackgroundContainer">
+            </div>  */} 
             <Col sm={16} lg={8}>
-                <Form
+                <Form className = "Formen"
                     onFinish={join}>
                     <Form.Item
-                        label="Join Code"
-                        name="joinCode"    
+                        name="joinCode" 
+                        className = "Formitems"
                     >
-                        <Input />
+                        <div className ="InputContainer">
+                            <img src="/images/frozen4.png" alt="" width = "300px" />
+                            <Input className="inputfield" placeholder="Join Code" />
+                        </div>
+                        
                     </Form.Item>
                     <Form.Item
-                        label="Nickname"
                         name="name"    
+                        className = "Formitems"
+
                     >
-                        <Input />
+                        <div className = "InputContainer">
+                            <img src="/images/fnick1.png" alt="" width = "300px" />
+                            <Input className="inputfield" placeholder = "Nickname"/>
+                        </div>
+                        
                     </Form.Item>
                     <Row justify="center">
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
-                                Join
+                            <Button id = "buttoninvis" type="primary" htmlType="submit">
+                            <div id="realButton" className="button ros" >
+                                <span className="content" >Join</span>
+                            </div>
                             </Button>
                         </Form.Item>
                     </Row>

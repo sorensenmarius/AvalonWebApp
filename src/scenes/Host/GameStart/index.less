@@ -1,7 +1,47 @@
+#main{
+    height: 100%;
+    background: url("https://cdna.artstation.com/p/assets/images/images/009/344/480/large/sylvain-sarrailh-forestofliars1080p.jpg?1518448119") no-repeat center center fixed;
+    //https://cdna.artstation.com/p/assets/images/images/009/344/480/large/sylvain-sarrailh-forestofliars1080p.jpg?1518448119
+    //https://images.wallpapersden.com/image/download/altos-adventure-minimalist-mountain_62161_1920x1080.jpg
+  //  https://c.wallhere.com/photos/83/f5/1772x917_px_artwork_birds_castle_clouds_fantasy_Art_horse_knight-827323.jpg!d
+     -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    -webkit-animation: myfirst 2s ; /* Chrome, Safari, Opera */
+    animation: myfirst 2s ;
+    
+}
+@-webkit-keyframes myfirst {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  /* Standard syntax */ 
+  @keyframes myfirst {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+
 .createGameView {
     margin-top: 100px;
     text-align: center;
     align-content: center;
+}
+#Backgroundtest{
+  height: 120px;
+  border-radius: 5%;
+  top:18.5%;
+  width: 20%;
+  z-index: 0;
+  background-color: black;
+  opacity: 0.15;
+  position: absolute;
+}
+#PlayerJoin{
+  min-height: 200px;
+  max-height: 200px;
 }
 
 .startButton {
