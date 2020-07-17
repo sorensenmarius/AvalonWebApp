@@ -1,6 +1,7 @@
 import { observable, action } from 'mobx';
 import { Round, EmptyRound } from '../models/Round/round';
 import roundService from '../services/roundService';
+import RoundStatus from '../models/Round/roundStatus';
 
 
 export default class RoundStore {
@@ -39,5 +40,10 @@ export default class RoundStore {
     @action
     async submitTeam(GameId: string) {
         await roundService.submitTeam(GameId);
+    }
+
+    @action
+    async setRoundStatus(GameId: string, Status: RoundStatus) {
+        await roundService.setRoundStatus(GameId, Status)
     }
 }

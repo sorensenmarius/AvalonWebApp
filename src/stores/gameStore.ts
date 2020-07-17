@@ -46,4 +46,9 @@ export default class GameStore {
     async getHowManyEvil(n: number) {
         return await gameService.getHowManyEvil(n);
     }
+
+    @action
+    async nextRound(gameId: string) {
+        return await gameService.nextRound(gameId);
+    }
 }

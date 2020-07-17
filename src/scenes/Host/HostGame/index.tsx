@@ -60,9 +60,10 @@ const HostGame = (props: any) => {
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
                     case RoundStatus.SelectingTeam: return <HostSelectingTeam game={game} />
-                    case RoundStatus.VotingForTeam: return <HostVoting expedition={false} game={game} />
+                    case RoundStatus.VotingForTeam: return <HostVoting expedition={false} game={game} key="teamVote" />
                     case RoundStatus.TeamApproved: return <HostTeamVoteResult accepted={true} game={game} key="teamVoteSuccessful"/>;
                     case RoundStatus.TeamDenied: return <HostTeamVoteResult accepted={false} game={game} key="teamVoteFailed"/>;
+                    case RoundStatus.VotingExpedition: return <HostVoting expedition={true} game={game} key="expeditionVote" />
                     case RoundStatus.MissionSuccess: return <HostExpeditionResult accepted={true} game={game} key="expeditionSuccessful" />;
                     case RoundStatus.MissionFailed: return <HostExpeditionResult accepted={false} game={game} key="expeditionFailed"/>;
                 }

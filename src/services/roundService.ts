@@ -1,5 +1,6 @@
 import http from './httpService'
 import { Round } from '../models/Round/round';
+import RoundStatus from '../models/Round/roundStatus';
 
 class RoundService {
     public async setTeam(GameId: string, CurrentTeam: string[]): Promise<void> {
@@ -44,6 +45,13 @@ class RoundService {
     public async submitTeam(GameId: string): Promise<void> {
         await http.post('api/services/app/Round/submitTeam', {
             GameId: GameId
+        })
+    }
+
+    public async setRoundStatus(gameId: string, status: Number): Promise<void> {
+        await http.post('api/services/app/Round/setRoundStatus', {
+            GameId: gameId,
+            Status: status
         })
     }
 }
