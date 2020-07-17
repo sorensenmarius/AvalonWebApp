@@ -1,0 +1,157 @@
+#root{
+    height: 100%;
+    background-color: black;
+}
+#HomeScreen {
+    height: 100%;
+    width: 100%;
+    background: url(https://vignette3.wikia.nocookie.net/adventurers-of-avalon/images/5/50/Wiki-background/revision/latest?cb=20170219075340) no-repeat center center fixed; 
+   -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#Title {
+    width: 100%;
+    margin-top: 10%;
+    height: 10%;
+    align-items: center;
+}
+
+.buttons{
+    margin: 10px;
+    background-size: cover;
+    border-radius: 10px;
+    width: 110px;
+    margin-left: -5%;
+    background-color: rgb(0, 217, 255);
+    opacity: 0.8;
+}
+#buttonContainer{
+    height: 40%;
+}
+#AvalonText{
+    font-size: 5em;
+    font-style: Copper;
+}
+h1 { 
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; font-size: 24px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; line-height: 26.4px; } 
+h3 { 
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 15.4px; } 
+p { 
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; line-height: 20px; } 
+blockquote { 
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+    font-size: 21px; font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; line-height: 30px; } 
+pre { 
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy; 
+    font-size: 13px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; 
+    line-height: 18.5714px; }
+
+    /* reset */
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+/* the magic */
+
+.button,
+.button:hover .content,
+.button:after,
+.button:before {
+    background-image: url("http://eu.battle.net/d3/static/images/layout/try-free-button-sprite.png");
+}
+
+.ros.button,
+.ros.button:hover .content,
+.ros.button:after,
+.ros.button:before {
+    background-image: url("http://i.imgur.com/YEVxQhI.png");
+}
+
+.button {
+    width: 250px;
+    margin: 2em 1em 0 2em;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 54px;
+    text-align: center;
+    text-shadow: 0 0 8px #000;
+    background-repeat: repeat-x;
+    background-position: 0px 0px;
+    z-index: 1;
+}
+
+.ros.button {
+    color: #70a0a0;
+}
+
+.content {
+    display: block;
+    padding: 0px 52px;
+}
+
+.button:hover .content {
+    color: #f4cc9e;
+    background-position: 0px -54px;
+    background-repeat: repeat-x;
+}
+
+.ros.button:hover .content {
+    color: #9eccf4;
+}
+
+.button:after,
+.button:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    width: 51px;
+    height: 54px;
+    z-index: 2;
+    /* cover the button */
+}
+
+.button:before {
+    left: -2px;
+    background-position: 0px -108px;
+}
+
+.button:after {
+    right: -2px;
+    background-position: 0px -162px;
+}
+#HomeScreen {
+    opacity: 1;
+    transition: opacity 1s;
+    transition-timing-function: cubic-bezier(0.34, 0.09, 0.96, 0.5);
+}
+#HomeScreen.fader { /*using both id and class so specificity causes this rule to override earlier rule*/
+    opacity: 0;
+}

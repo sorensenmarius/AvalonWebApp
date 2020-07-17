@@ -1,58 +1,56 @@
-.centerContent {
-    text-align: center;
-    width: 50%;
-    margin-left: 25%;
-    z-index: 10;
-    
-}
-.fadein {
-    filter: brightness(100%);
-    transition: filter 1s, box-shadow 1s;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-
+#bg {
+    width: 100%;
+    height: 100%;
+    background: url("https://images2.alphacoders.com/486/thumb-1920-486587.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    -webkit-animation: myfirst 2s ; /* Chrome, Safari, Opera */
+    animation: myfirst 2s ;
   }
-  .fadein.is-active {
+  .Formen{
+      margin-top: 35%;
+  }
+ 
+  .inputfield{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    width: 70%;
+    border: none;
     opacity: 1;
-    transition: all ease 0.65s;
+    background-color: transparent;
+    padding-right: 5px;
+    border-bottom: 2px solid black;
   }
-  .fade {
-    filter: brightness(25%);
-    border-radius: 10px;
-    transition: filter 1s, box-shadow 1s;
-
-  }
- /*  #BackgroundContainer{
-    background-color: white;
+/*   #BackgroundContainer{
+    background-color: rgb(0, 0, 0);
     border-radius: 20%;
-    opacity: 0.1;
+    opacity: 0.2;
     z-index: 0;
-    width: 60%;
-    height: 90%;
-    bottom: 5%;
+    width: 30%;
+    height: 55%;
+    bottom: 30%;
     position: absolute;
   } */
-  .Cards{
-    border: none;
-    border-radius: 4%;
-    opacity: 1;
-    margin-left: 0;
-    right: 10%;
+
+  #buttoninvis{
+    visibility: hidden;
   }
-  #EvilCols{
-    margin-left: 0;
-    padding-left: 0;
-  }
-  #GoodRoles{
-    left: 50%;
-  }
-  #GodButton{
-    position: fixed;
-    top: 85%;
-  }
-  .RedSpan{
-    color: red;
+ #realButton{
+    visibility: visible;
+ }
+  /* Chrome, Safari, Opera */
+  @-webkit-keyframes myfirst {
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
 
+  /* Standard syntax */
+  @keyframes myfirst {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
   .button,
 .button:hover .content,
 .button:after,
@@ -83,6 +81,7 @@
     background-position: 0px 0px;
     z-index: 1;
 }
+
 .ros.button {
     color: #70a0a0;
 }
@@ -122,8 +121,4 @@
 .button:after {
     right: -2px;
     background-position: 0px -162px;
-}
-#app{
-  margin-left: 100px;
-  background-color: transparent;
 }
