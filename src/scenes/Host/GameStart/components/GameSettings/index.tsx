@@ -46,7 +46,7 @@ const GameSettings = (props: any) => {
     }
 
     const startGame = async () => {
-        let minions = evilCount - evilRoles.length
+        let minions = 0//evilCount - evilRoles.length
         await gameStore.startGame(game.id, [...goodRoles, ...evilRoles], minions)
         history.push("/host")
     }
