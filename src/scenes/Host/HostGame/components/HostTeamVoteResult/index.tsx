@@ -21,6 +21,7 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
         setTimeout(nextScreen, seconds * 10)
         const interval = setInterval(() => {
             setSeconds(seconds => seconds - 1)
+            console.log(seconds)
         }, 10)
         return () => clearInterval(interval)
     }, [])
@@ -30,7 +31,6 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
             await roundStore?.setRoundStatus(game.id, RoundStatus.VotingExpedition)
         } else {
             await roundStore?.setRoundStatus(game.id, RoundStatus.SelectingTeam)
-
         }
     }
 
@@ -67,7 +67,7 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
                                     </Row>
                                     <Row justify="center">
                                         {game.currentRound.currentTeam.map((p: Player) => (
-                                            <Col>
+                                            <Col key={"hostTeamVoteResultName" + p.name}>
                                                 {p.name}  
                                             </Col>
                                         ))}
@@ -89,7 +89,7 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
                         }
                     })()}
                 <Row>
-                    <Progress percent={seconds/20} format={() => ""} />
+                    <Progress percent={seconds/20} format={() => ""} key="teamProgressBar" />
                 </Row>
             </Col>
         </Row>
