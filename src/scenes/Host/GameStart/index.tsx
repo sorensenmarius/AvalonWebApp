@@ -7,21 +7,11 @@ import { Player } from '../../../models/Players/player';
 import GameSettings from './components/GameSettings';
 
 const GameStart = (props: any) => {
-    const [evilCount, setEvilCount] = useState(0);
     const [game, setGame] = useState(props.gameStore.currentGame);
 
     useEffect(() => {
         setGame(props.gameStore.currentGame);
     }, [props.gameStore.currentGame])
-
-    useEffect(() => {
-        (async () => {
-            if(game.players.length >= 5) {
-                let n = await props.gameStore.getHowManyEvil(game.players.length);
-                setEvilCount(n);
-            };
-        })();
-    }, [game])
 
     return(
         <Row justify="center">
@@ -49,7 +39,7 @@ const GameStart = (props: any) => {
                         />
                     </Col>
                 </Row>
-                <GameSettings game={ game } evilCount={evilCount} />
+                <GameSettings game={ game } />
             </Col>
         </Row>
     )

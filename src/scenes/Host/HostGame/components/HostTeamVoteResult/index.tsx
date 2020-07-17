@@ -15,13 +15,12 @@ interface HostTeamVoteResultProps {
 
 const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
     const { accepted, game, roundStore } = props;
-    const [seconds, setSeconds] = useState(2000)
+    const [seconds, setSeconds] = useState(200)
 
     useEffect(() => {
         setTimeout(nextScreen, seconds * 10)
         const interval = setInterval(() => {
             setSeconds(seconds => seconds - 1)
-            console.log(seconds)
         }, 10)
         return () => clearInterval(interval)
     }, [])
@@ -80,9 +79,15 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
                         } else {
                             return (
                                 <React.Fragment>
-                                    <h1>The vote failed!</h1>
+                                    <Row>
+                                        <h1>The vote failed!</h1>
+                                    </Row>
                                     <Row>
                                         <h2>The next player to choose a team is {game.currentPlayer.name}</h2>
+                                    </Row>
+                                    <Row>
+                                        <h3>Failed missions: {game.currentRound.failedTeams}</h3>
+                                        <h4>5 failed teams results in automatic failed mission</h4>
                                     </Row>
                                 </React.Fragment>
                             )

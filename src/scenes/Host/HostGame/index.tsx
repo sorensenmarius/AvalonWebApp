@@ -11,14 +11,14 @@ import HostSelectingTeam from './components/HostSelectingTeam';
 import HostVoting from './components/HostVoting';
 import HostTeamVoteResult from './components/HostTeamVoteResult';
 import HostExpeditionResult from './components/HostExpeditionResult';
+import HostAssassinTurn from './components/HostAssassinTurn';
+import HostGameEnded from './components/HostGameEnded';
 
 const HostGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame);
 
     useEffect(() => {
-        console.log(props.gameStore.currentGame)
         setGame(props.gameStore.currentGame);
-        console.log(game)
     }, [props.gameStore.currentGame])
     
     useEffect(() => {
@@ -68,6 +68,8 @@ const HostGame = (props: any) => {
                     case RoundStatus.MissionFailed: return <HostExpeditionResult accepted={false} game={game} key="expeditionFailed"/>;
                 }
             }
+            if(game.status === GameStatus.AssassinTurn) return <HostAssassinTurn />
+            if(game.status === GameStatus.Ended) return <HostGameEnded game={game} />
             return null;
         })()
     )

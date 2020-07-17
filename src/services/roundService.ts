@@ -1,6 +1,5 @@
 import http from './httpService'
 import { Round } from '../models/Round/round';
-import RoundStatus from '../models/Round/roundStatus';
 
 class RoundService {
     public async setTeam(GameId: string, CurrentTeam: string[]): Promise<void> {

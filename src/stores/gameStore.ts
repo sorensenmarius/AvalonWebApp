@@ -25,8 +25,8 @@ export default class GameStore {
     }
 
     @action
-    async startGame(gameId: string, rollene: string[], minions: number){
-        let response = await gameService.startGame(gameId , rollene, minions);
+    async startGame(gameId: string, rollene: string[]){
+        let response = await gameService.startGame(gameId , rollene);
         this.currentGame = response;
     }
 

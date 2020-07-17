@@ -11,9 +11,20 @@ import { Game } from '../../../models/Game/game';
 import VotingForTeam from './components/VotingForTeam';
 import Loader from './components/Loader';
 import ExpeditionVote from './components/ExpeditionVote';
+import AssassinTurn from './components/AssassinTurn';
+import GameEnded from './components/GameEnded';
+import GameStore from '../../../stores/gameStore';
+import PlayerStore from '../../../stores/playerStore';
+import { Player } from '../../../models/Players/player';
 
-const PlayGame = (props: any) => {
-    const [game, setGame] = useState<Game>(props.gameStore.currentGame)
+interface PlayGameProps {
+    gameStore: GameStore
+    playerStore: PlayerStore
+}
+
+const PlayGame = (props: PlayGameProps) => {
+    const { gameStore, playerStore } = props
+    const [game, setGame] = useState<Game>(gameStore.currentGame)
     
     useEffect(() => {
         (async () => {
@@ -23,8 +34,9 @@ const PlayGame = (props: any) => {
     }, [])
 
     useEffect(() => {
-        setGame(props.gameStore.currentGame)
-    }, [props.gameStore.currentGame])
+        setGame(gameStore.currentGame)
+        playerStore.currentPlayer = game.players.find((p: Player) => p.id === playerStore.currentPlayer.id)!
+    }, [gameStore?.currentGame])
 
     const initSocket = async () => {
         const connect = new HubConnectionBuilder()
@@ -57,6 +69,8 @@ const PlayGame = (props: any) => {
                     case RoundStatus.MissionFailed: return <Loader />;
                 }
             }
+            if(game.status === GameStatus.AssassinTurn) return <AssassinTurn me={props.playerStore.currentPlayer} game={game} />
+            if(game.status === GameStatus.Ended) return <GameEnded />
             return null;
         })()
     )
