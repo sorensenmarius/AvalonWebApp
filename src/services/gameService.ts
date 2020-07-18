@@ -47,7 +47,7 @@ class GameService {
     }
     public async removePlayer(gameId: string, playerId: string): Promise<void> {
         await http.delete('api/services/app/Game/RemovePlayer', { 
-            data: {
+            params: {
                 gameId: gameId,
                 playerId: playerId
             }

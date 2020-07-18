@@ -16,6 +16,7 @@ import GameEnded from './components/GameEnded';
 import GameStore from '../../../stores/gameStore';
 import PlayerStore from '../../../stores/playerStore';
 import { Player } from '../../../models/Players/player';
+import { useHistory } from 'react-router-dom';
 
 interface PlayGameProps {
     gameStore?: GameStore
@@ -25,6 +26,7 @@ interface PlayGameProps {
 const PlayGame = (props: PlayGameProps) => {
     const { gameStore, playerStore } = props
     const [game, setGame] = useState<Game>(gameStore!.currentGame)
+    const history = useHistory()
     
     useEffect(() => {
         (async () => {
@@ -35,7 +37,14 @@ const PlayGame = (props: PlayGameProps) => {
 
     useEffect(() => {
         setGame(gameStore!.currentGame)
-        playerStore!.currentPlayer = game.players.find((p: Player) => p.id === playerStore!.currentPlayer.id)!
+        let currentPlayer = gameStore!.currentGame.players.find((p: Player) => p.id === playerStore!.currentPlayer.id)!
+        if(currentPlayer != undefined) {
+            playerStore!.currentPlayer = currentPlayer
+        } else {
+            history.push('/play', {
+                kicked: true
+            })
+        }
     }, [gameStore?.currentGame])
 
     const initSocket = async () => {

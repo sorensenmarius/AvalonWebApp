@@ -15,6 +15,7 @@ const GameStart = (props: any) => {
     }, [props.gameStore.currentGame])
 
     const removePlayer = (id: string) => {
+        console.log(id)
         props.gameStore.removePlayer(game.id, id)
     }
 
@@ -37,10 +38,17 @@ const GameStart = (props: any) => {
                                 xl: 6,
                                 xxl: 3}}
                             dataSource={game.players} 
+                            locale={{
+                                emptyText: (
+                                    <>
+                                        <h4>No players have joined yet</h4>
+                                    </>
+                                )
+                            }}
                             renderItem={(player: Player) => (
                                 <List.Item>
                                     <Tag 
-                                        color='darkblue'
+                                        color='processing'
                                         closable={true}
                                         onClose={() => removePlayer(player.id)}
                                     >
