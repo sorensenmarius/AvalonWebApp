@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { observer } from 'mobx-react'
 import { Col, Row } from 'antd'
 import './index.less'
@@ -6,6 +6,12 @@ import { useHistory } from 'react-router-dom'
 
 const Home = (props: any) => {
     const history = useHistory();
+
+    useEffect(() => {
+        setTimeout(() => {
+            document.getElementById("HomeScreen")?.classList.remove("fader")
+        }, 10)
+    }, [])
 
     const handleHost = () => {
         var t = document.getElementById("HomeScreen");
@@ -31,7 +37,7 @@ const Home = (props: any) => {
     }
 
     return(
-        <Row id = "HomeScreen" justify="center" >
+        <Row id="HomeScreen" justify="center" className="fader">
             <div id = "Title">
                 <Row justify="center"> 
                     <h1 id = "AvalonText">Avalon</h1>
