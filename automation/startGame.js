@@ -18,7 +18,7 @@ var joinGame = async function (b, name, joinCode) {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.goto('http://localhost:3000/host');
-    const clickRoles = [2, 3, 5, 6]
+    const clickRoles = [2, 3, 5, 7]
     await page.waitFor(() => {
         const joinCode = document.querySelector('h1')
         return joinCode && joinCode.innerHTML.length
@@ -33,6 +33,6 @@ var joinGame = async function (b, name, joinCode) {
         await joinGame(browser, i.toString(), joinCode)
     }
     await page.bringToFront()
-    const startButton = await page.$('button')
-    await startButton.click()
+    // const startButton = await page.$('button')
+    // await startButton.click()
 })();

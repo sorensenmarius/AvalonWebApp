@@ -8,13 +8,29 @@ import { Game } from '../../../../../models/Game/game'
 import GameStore from '../../../../../stores/gameStore'
 import { useHistory } from 'react-router-dom'
 
-const GameSettings = (props: any) => {
-    const { game, evilCount, gameStore }: {game: Game, evilCount: number, gameStore: GameStore} = props
+interface GameSettingsProps {
+    game: Game
+    gameStore?: GameStore
+}
+
+const GameSettings = (props: GameSettingsProps) => {
+    const { game, gameStore } = props
     const [showGoodError, setShowGoodError] = useState(false);
     const [showEvilError, setShowEvilError] = useState(false);
     const [goodRoles, setGoodRoles] = useState<string[]>([])
     const [evilRoles, setEvilRoles] = useState<string[]>([])
+    const [evilCount, setEvilCount] = useState(0);
+
     const history = useHistory();
+
+    useEffect(() => {
+        (async () => {
+            if(game.players.length >= 5) {
+                let n = await gameStore?.getHowManyEvil(game.players.length);
+                setEvilCount(n ? n : 0);
+            };
+        })();
+    }, [game.players])
     
     const handleCheck = (e: any) => {
         // TODO - FIX BUG
@@ -46,8 +62,7 @@ const GameSettings = (props: any) => {
     }
 
     const startGame = async () => {
-        let minions = evilCount - evilRoles.length
-        await gameStore.startGame(game.id, [...goodRoles, ...evilRoles], minions)
+        await gameStore?.startGame(game.id, [...goodRoles, ...evilRoles])
         history.push("/host")
     }
     var array = [
