@@ -45,6 +45,14 @@ class GameService {
             GameId: gameId
         })
     }
+    public async removePlayer(gameId: string, playerId: string): Promise<void> {
+        await http.delete('api/services/app/Game/RemovePlayer', { 
+            data: {
+                gameId: gameId,
+                playerId: playerId
+            }
+        })
+    }
 }
 
 export default new GameService()
