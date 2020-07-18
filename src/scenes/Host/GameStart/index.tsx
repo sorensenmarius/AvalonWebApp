@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, List } from 'antd';
+import { Row, Col, List, Tag } from 'antd';
 import { inject, observer } from 'mobx-react';
 import Stores from '../../../stores/storeIdentifier';
 import './index.less';
 import { Player } from '../../../models/Players/player';
 import GameSettings from './components/GameSettings';
+import { Game } from '../../../models/Game/game';
 
 const GameStart = (props: any) => {
-    const [game, setGame] = useState(props.gameStore.currentGame);
+    const [game, setGame] = useState<Game>(props.gameStore.currentGame);
 
     useEffect(() => {
         setGame(props.gameStore.currentGame);
     }, [props.gameStore.currentGame])
+
+    const removePlayer = (id: string) => {
+        props.gameStore.removePlayer(game.id, id)
+    }
 
     return(
         <Row id = "main" justify="center">
@@ -34,7 +39,13 @@ const GameStart = (props: any) => {
                             dataSource={game.players} 
                             renderItem={(player: Player) => (
                                 <List.Item>
-                                    {player.name}
+                                    <Tag 
+                                        color='darkblue'
+                                        closable={true}
+                                        onClose={() => removePlayer(player.id)}
+                                    >
+                                        {player.name}
+                                    </Tag>
                                 </List.Item>
                             )}
                         />
