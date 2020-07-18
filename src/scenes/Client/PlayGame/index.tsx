@@ -18,13 +18,13 @@ import PlayerStore from '../../../stores/playerStore';
 import { Player } from '../../../models/Players/player';
 
 interface PlayGameProps {
-    gameStore: GameStore
-    playerStore: PlayerStore
+    gameStore?: GameStore
+    playerStore?: PlayerStore
 }
 
 const PlayGame = (props: PlayGameProps) => {
     const { gameStore, playerStore } = props
-    const [game, setGame] = useState<Game>(gameStore.currentGame)
+    const [game, setGame] = useState<Game>(gameStore!.currentGame)
     
     useEffect(() => {
         (async () => {
@@ -34,8 +34,8 @@ const PlayGame = (props: PlayGameProps) => {
     }, [])
 
     useEffect(() => {
-        setGame(gameStore.currentGame)
-        playerStore.currentPlayer = game.players.find((p: Player) => p.id === playerStore.currentPlayer.id)!
+        setGame(gameStore!.currentGame)
+        playerStore!.currentPlayer = game.players.find((p: Player) => p.id === playerStore!.currentPlayer.id)!
     }, [gameStore?.currentGame])
 
     const initSocket = async () => {
@@ -50,7 +50,7 @@ const PlayGame = (props: PlayGameProps) => {
             console.log(err)
         }
         connect.on("UpdateAll", function() {
-            props.gameStore.get(game.id);
+            gameStore!.get(game.id);
         })
     }
 
@@ -60,16 +60,16 @@ const PlayGame = (props: PlayGameProps) => {
             if(game.status === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
             if(game.status === GameStatus.Playing) {
                 switch(game.currentRound.status) {
-                    case RoundStatus.SelectingTeam: return <SelectingTeam me={props.playerStore.currentPlayer} game={game} />
-                    case RoundStatus.VotingForTeam: return <VotingForTeam me={props.playerStore.currentPlayer} game={game} />
+                    case RoundStatus.SelectingTeam: return <SelectingTeam me={playerStore!.currentPlayer} game={game} />
+                    case RoundStatus.VotingForTeam: return <VotingForTeam me={playerStore!.currentPlayer} game={game} />
                     case RoundStatus.TeamApproved: return <Loader />;
                     case RoundStatus.TeamDenied: return <Loader />;
-                    case RoundStatus.VotingExpedition: return <ExpeditionVote me={props.playerStore.currentPlayer} game={game} />
+                    case RoundStatus.VotingExpedition: return <ExpeditionVote me={playerStore!.currentPlayer} game={game} />
                     case RoundStatus.MissionSuccess: return <Loader />;
                     case RoundStatus.MissionFailed: return <Loader />;
                 }
             }
-            if(game.status === GameStatus.AssassinTurn) return <AssassinTurn me={props.playerStore.currentPlayer} game={game} />
+            if(game.status === GameStatus.AssassinTurn) return <AssassinTurn me={playerStore!.currentPlayer} game={game} />
             if(game.status === GameStatus.Ended) return <GameEnded />
             return null;
         })()
