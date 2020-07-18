@@ -54,4 +54,9 @@ export default class GameStore {
     async nextRound(gameId: string) {
         return await gameService.nextRound(gameId);
     }
+
+    @action
+    async removePlayer(gameId: string, playerId: string) {
+        return await gameService.removePlayer(gameId, playerId);
+    }
 }

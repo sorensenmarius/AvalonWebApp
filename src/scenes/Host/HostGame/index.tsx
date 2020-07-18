@@ -16,6 +16,7 @@ import HostGameEnded from './components/HostGameEnded';
 import HostPlayerOrder from './components/HostPlayerOrder';
 import { Col, Row } from 'antd';
 import HostPreviousRounds from './components/HostPreviousRounds';
+import './index.less';
 
 const HostGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame);
@@ -74,6 +75,9 @@ const HostGame = (props: any) => {
             if(game.status === GameStatus.WaitingForPlayers) return <GameStart game={game}/>
             if(game.status === GameStatus.Playing) return(
                 <React.Fragment>
+                    <video autoPlay muted loop className="playingBackground">
+                        <source src="/images/torches.webm" type="video/mp4" />
+                    </video>
                     <Row>
                         <Col
                             span={6}
