@@ -7,6 +7,7 @@ export interface Player {
     roleName: string;
     roleInfo: string;
     isEvil: boolean;
+    order: number;
 }
 
 export class EmptyPlayer implements Player {
@@ -16,6 +17,7 @@ export class EmptyPlayer implements Player {
     roleName: string;
     roleInfo: string;
     isEvil: boolean;
+    order: number;
 
     constructor() {
         this.id = "";
@@ -24,5 +26,6 @@ export class EmptyPlayer implements Player {
         this.roleName = "";
         this.roleInfo = "";
         this.isEvil = false;
+        this.order = 0;
     }
 }

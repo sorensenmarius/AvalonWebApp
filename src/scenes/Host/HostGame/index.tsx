@@ -13,6 +13,9 @@ import HostTeamVoteResult from './components/HostTeamVoteResult';
 import HostExpeditionResult from './components/HostExpeditionResult';
 import HostAssassinTurn from './components/HostAssassinTurn';
 import HostGameEnded from './components/HostGameEnded';
+import HostPlayerOrder from './components/HostPlayerOrder';
+import { Col, Row } from 'antd';
+import HostPreviousRounds from './components/HostPreviousRounds';
 
 const HostGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame);
@@ -53,22 +56,45 @@ const HostGame = (props: any) => {
         })
     }
 
+    const currentContent = () => {
+        switch(game.currentRound.status) {
+            case RoundStatus.SelectingTeam: return <HostSelectingTeam game={game} />
+            case RoundStatus.VotingForTeam: return <HostVoting expedition={false} game={game} key="teamVote" />
+            case RoundStatus.TeamApproved: return <HostTeamVoteResult accepted={true} game={game} key="teamVoteSuccessful"/>;
+            case RoundStatus.TeamDenied: return <HostTeamVoteResult accepted={false} game={game} key="teamVoteFailed"/>;
+            case RoundStatus.VotingExpedition: return <HostVoting expedition={true} game={game} key="expeditionVote" />
+            case RoundStatus.MissionSuccess: return <HostExpeditionResult accepted={true} game={game} key="expeditionSuccessful" />;
+            case RoundStatus.MissionFailed: return <HostExpeditionResult accepted={false} game={game} key="expeditionFailed"/>;
+        }
+        return null
+    }
 
     return(
         (() => {
             if(game.status === GameStatus.WaitingForPlayers) return <GameStart game={game}/>
-            if(game.status === GameStatus.Playing) {
-                switch(game.currentRound.status) {
-                    case RoundStatus.SelectingTeam: return <HostSelectingTeam game={game} />
-                    case RoundStatus.VotingForTeam: return <HostVoting expedition={false} game={game} key="teamVote" />
-                    case RoundStatus.TeamApproved: return <HostTeamVoteResult accepted={true} game={game} key="teamVoteSuccessful"/>;
-                    case RoundStatus.TeamDenied: return <HostTeamVoteResult accepted={false} game={game} key="teamVoteFailed"/>;
-                    case RoundStatus.VotingExpedition: return <HostVoting expedition={true} game={game} key="expeditionVote" />
-                    case RoundStatus.MissionSuccess: return <HostExpeditionResult accepted={true} game={game} key="expeditionSuccessful" />;
-                    case RoundStatus.MissionFailed: return <HostExpeditionResult accepted={false} game={game} key="expeditionFailed"/>;
-                }
-            }
-            if(game.status === GameStatus.AssassinTurn) return <HostAssassinTurn />
+            if(game.status === GameStatus.Playing) return(
+                <React.Fragment>
+                    <Row>
+                        <Col
+                            span={6}
+                        >
+                            <HostPreviousRounds game={game} />
+                        </Col>
+                        <Col
+                            span={12}>
+                            {currentContent()}
+                        </Col>
+                        <Col
+                            span={6}
+                        >
+                        </Col>
+                    </Row>
+                    <Row>
+                        <HostPlayerOrder game={game} />
+                    </Row>
+                </React.Fragment>
+            )
+            if(game.status === GameStatus.AssassinTurn) return <HostAssassinTurn game={game} />
             if(game.status === GameStatus.Ended) return <HostGameEnded game={game} />
             return null;
         })()

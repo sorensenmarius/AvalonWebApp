@@ -15,6 +15,9 @@ export default class GameStore {
     @action
     async get(gameId: string) {
         let response = await gameService.get(gameId);
+        response.players.sort((a, b) => {
+            return a.order - b.order
+        })
         this.currentGame = response;
     }
 
