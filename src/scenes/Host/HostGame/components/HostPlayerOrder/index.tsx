@@ -3,6 +3,7 @@ import { observer } from 'mobx-react'
 import { Game } from '../../../../../models/Game/game'
 import { Player } from '../../../../../models/Players/player'
 import { Row, Col } from 'antd'
+import "./index.less"
 
 interface HostPlayerOrderProps {
     game: Game
@@ -20,25 +21,28 @@ const HostPlayerOrder = (props: HostPlayerOrderProps) => {
     }
 
     return(
-        <Row>
-            {orderedPlayers().map((p: Player, i: number) => (
-                <React.Fragment>
-                    <Col>
-                        <h3>{p.name}</h3>
-                    </Col>
-                    {(() => {
-                        if(orderedPlayers().length !== i + 1) {
-                            return(
-                                <Col>
-                                    -&gt;
-                                </Col>
-                            )
-                        }
-                        return
-                    })()}
-                </React.Fragment>
-            ))}
+        <Row  className = "OrderPlayerComp">
+            <div className ="Backgroundcontainer">
+                <img src="/images/Scroll.png" width = "100%" height= "100%" alt=""/>
+            </div>
+            <div className = "Contentcontainer">
+                <div>
+                    <h1>The Next Player is: </h1>
+                </div>
+                <Col>
+
+            
+                {orderedPlayers().map((p: Player, i: number) => (
+                        <Row justify="center" className = "PlayerNameContainer" key={p.id + HostPlayerOrder  }>
+                        <div className = "OnePlayer">
+                            <h3>{p.name}</h3>
+                        </div>
+                        </Row>
+                ))}
+                </Col>
+             </div>
         </Row>
+
     )
 }
 

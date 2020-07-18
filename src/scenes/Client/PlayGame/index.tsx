@@ -73,7 +73,7 @@ const PlayGame = (props: PlayGameProps) => {
             if(game.status === GameStatus.Ended) return <GameEnded />
             return null;
         })()
-    )
+    )   
 }
 
 export default inject(Stores.GameStore)(inject(Stores.PlayerStore)(observer(PlayGame)));
