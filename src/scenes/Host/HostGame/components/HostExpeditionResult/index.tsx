@@ -13,13 +13,12 @@ interface HostExpeditionResultProps {
 
 const HostExpeditionResult = (props: HostExpeditionResultProps) => {
     const { accepted, game, gameStore } = props;
-    const [seconds, setSeconds] = useState(2000)
+    const [seconds, setSeconds] = useState(200)
 
     useEffect(() => {
         setTimeout(nextScreen, seconds * 10)
         const interval = setInterval(() => {
             setSeconds(seconds => seconds - 1)
-            console.log(seconds)
         }, 10)
         return () => clearInterval(interval)
     }, [])

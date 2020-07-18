@@ -10,8 +10,10 @@ export interface Game {
     creationTime: Date;
     currentRound: Round;
     currentPlayer: Player;
-    pointsEvil: Number;
-    pointsInnocent: Number;
+    pointsEvil: number;
+    pointsInnocent: number;
+    counter: number; 
+    previousRounds: Round[];
 }
 
 export class EmptyGame implements Game {
@@ -22,8 +24,10 @@ export class EmptyGame implements Game {
     creationTime: Date;
     currentRound: Round;
     currentPlayer: Player;
-    pointsEvil: Number;
-    pointsInnocent: Number;
+    pointsEvil: number;
+    pointsInnocent: number;
+    counter: number;
+    previousRounds: Round[];
 
     constructor() {
         this.id = '';
@@ -35,5 +39,7 @@ export class EmptyGame implements Game {
         this.currentPlayer = new EmptyPlayer();
         this.pointsEvil = 0;
         this.pointsInnocent = 0;
+        this.counter = 0;
+        this.previousRounds = [];
     }
 }

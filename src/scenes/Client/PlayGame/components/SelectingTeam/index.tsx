@@ -24,7 +24,6 @@ const SelectingTeam = (props: SelectingTeamProps) => {
 
     const checkedPlayer = async (playerId: string) => {
         if (currentTeam.includes(playerId)) {
-            console.log(currentTeam.filter((id: string) => id !== playerId))
             setCurrentTeam(currentTeam.filter((id: string) => id !== playerId))
         } else {
             var tmp = [...currentTeam]

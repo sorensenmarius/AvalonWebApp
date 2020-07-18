@@ -12,12 +12,11 @@ class GameService {
         return response.data.result;
     }
 
-    public async startGame(gameId: string, rollene: string[], minions: number): Promise<Game> {
+    public async startGame(gameId: string, rollene: string[]): Promise<Game> {
         let response = await http.post('api/services/app/Game/StartGame', { 
-                id: gameId,
-                roles: rollene,
-                minions: minions
-            })
+            id: gameId,
+            roles: rollene
+        })
         return response.data.result;
     } 
 
@@ -27,7 +26,10 @@ class GameService {
     }
     
     public async assassinate(gameId: string, playerId: string): Promise<Game> {
-        let response = await http.post('api/services/app/Game/Assassinate', { params: {GameId: gameId, PlayerId: playerId} });
+        let response = await http.post('api/services/app/Game/Assassinate', {
+            GameId: gameId, 
+            PlayerId: playerId
+        });
         return response.data.result;
     }
     public async gameEnd(gameId: string): Promise<Game> {

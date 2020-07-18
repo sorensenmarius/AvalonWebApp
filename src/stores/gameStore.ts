@@ -15,6 +15,9 @@ export default class GameStore {
     @action
     async get(gameId: string) {
         let response = await gameService.get(gameId);
+        response.players.sort((a, b) => {
+            return a.order - b.order
+        })
         this.currentGame = response;
     }
 
@@ -25,8 +28,8 @@ export default class GameStore {
     }
 
     @action
-    async startGame(gameId: string, rollene: string[], minions: number){
-        let response = await gameService.startGame(gameId , rollene, minions);
+    async startGame(gameId: string, rollene: string[]){
+        let response = await gameService.startGame(gameId , rollene);
         this.currentGame = response;
     }
 
