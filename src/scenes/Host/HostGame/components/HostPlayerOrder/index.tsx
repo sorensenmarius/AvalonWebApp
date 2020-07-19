@@ -27,7 +27,7 @@ const HostPlayerOrder = (props: HostPlayerOrderProps) => {
             </div>
             <div className = "Contentcontainer">
                 <div>
-                    <h1>The Player order is: </h1>
+                    <h2> <b>The Player order is:</b> </h2>
                 </div>
                 <Col>
 

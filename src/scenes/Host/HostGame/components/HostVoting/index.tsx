@@ -3,6 +3,8 @@ import { observer } from 'mobx-react'
 import { Row, Col, List } from 'antd'
 import { Player } from '../../../../../models/Players/player'
 import { Game } from '../../../../../models/Game/game'
+import './index.less';
+
 interface HostVotingProps {
     expedition: Boolean;
     game: Game;

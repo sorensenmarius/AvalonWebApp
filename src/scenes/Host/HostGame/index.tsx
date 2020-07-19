@@ -85,6 +85,7 @@ const HostGame = (props: any) => {
                             <HostPreviousRounds game={game} />
                         </Col>
                         <Col
+                            className = "MainContent"
                             span={12}>
                             {currentContent()}
                         </Col>
