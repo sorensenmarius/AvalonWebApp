@@ -16,6 +16,9 @@ import GameEnded from './components/GameEnded';
 import GameStore from '../../../stores/gameStore';
 import PlayerStore from '../../../stores/playerStore';
 import { Player } from '../../../models/Players/player';
+import { useHistory } from 'react-router-dom';
+import RoleModal from './components/RoleModal';
+import { Fab } from '@material-ui/core'
 
 interface PlayGameProps {
     gameStore?: GameStore
@@ -25,6 +28,8 @@ interface PlayGameProps {
 const PlayGame = (props: PlayGameProps) => {
     const { gameStore, playerStore } = props
     const [game, setGame] = useState<Game>(gameStore!.currentGame)
+    const [showModal, setShowModal] = useState(false)
+    const history = useHistory()
     
     useEffect(() => {
         (async () => {
@@ -35,7 +40,14 @@ const PlayGame = (props: PlayGameProps) => {
 
     useEffect(() => {
         setGame(gameStore!.currentGame)
-        playerStore!.currentPlayer = game.players.find((p: Player) => p.id === playerStore!.currentPlayer.id)!
+        let currentPlayer = gameStore!.currentGame.players.find((p: Player) => p.id === playerStore!.currentPlayer.id)!
+        if(currentPlayer != undefined) {
+            playerStore!.currentPlayer = currentPlayer
+        } else {
+            history.push('/play', {
+                kicked: true
+            })
+        }
     }, [gameStore?.currentGame])
 
     const initSocket = async () => {
@@ -54,20 +66,44 @@ const PlayGame = (props: PlayGameProps) => {
         })
     }
 
+    const toggleModal = () => {
+        setShowModal(!showModal)
+    }
 
+    const content = () => {
+        switch(game.currentRound.status) {
+            case RoundStatus.SelectingTeam: return <SelectingTeam me={playerStore!.currentPlayer} game={game} />
+            case RoundStatus.VotingForTeam: return <VotingForTeam me={playerStore!.currentPlayer} game={game} />
+            case RoundStatus.TeamApproved: return <Loader />;
+            case RoundStatus.TeamDenied: return <Loader />;
+            case RoundStatus.VotingExpedition: return <ExpeditionVote me={playerStore!.currentPlayer} game={game} />
+            case RoundStatus.MissionSuccess: return <Loader />;
+            case RoundStatus.MissionFailed: return <Loader />;
+        }
+        return
+    }
     return(
         (() => {
             if(game.status === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
             if(game.status === GameStatus.Playing) {
-                switch(game.currentRound.status) {
-                    case RoundStatus.SelectingTeam: return <SelectingTeam me={playerStore!.currentPlayer} game={game} />
-                    case RoundStatus.VotingForTeam: return <VotingForTeam me={playerStore!.currentPlayer} game={game} />
-                    case RoundStatus.TeamApproved: return <Loader />;
-                    case RoundStatus.TeamDenied: return <Loader />;
-                    case RoundStatus.VotingExpedition: return <ExpeditionVote me={playerStore!.currentPlayer} game={game} />
-                    case RoundStatus.MissionSuccess: return <Loader />;
-                    case RoundStatus.MissionFailed: return <Loader />;
-                }
+                return(
+                    <>
+                        {content()}
+                        <RoleModal me={playerStore!.currentPlayer} showModal={showModal} toggleModal={toggleModal} />
+                        <Fab
+                            variant="extended"
+                            size="medium"
+                            onClick={toggleModal}
+                            style={{
+                                position: "fixed",
+                                bottom: "10px",
+                                right: "10px"
+                            }}
+                        >
+                            Role
+                        </Fab>
+                    </>
+                )
             }
             if(game.status === GameStatus.AssassinTurn) return <AssassinTurn me={playerStore!.currentPlayer} game={game} />
             if(game.status === GameStatus.Ended) return <GameEnded />

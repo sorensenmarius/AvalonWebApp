@@ -1,7 +1,7 @@
-import React, { } from 'react'
+import React, { useEffect } from 'react'
 import { inject, observer } from 'mobx-react'
-import { Col, Form, Input, Row, Button } from 'antd'
-import { useHistory } from 'react-router-dom'
+import { Col, Form, Input, Row, Button, notification } from 'antd'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Game } from '../../../models/Game/game'
 import Stores from '../../../stores/storeIdentifier'
 import './index.less';
@@ -9,6 +9,16 @@ import './index.less';
 
 const JoinGame = (props: any) => {
     const history = useHistory();
+    const location = useLocation();
+
+    useEffect(() => {
+        if(location.state != null && location.state['kicked']) {
+            notification.open({
+                message: 'Kicked',
+                description: 'You were kicked from the game by the host'
+            })
+        }
+    })
 
     const join = async (values: any) => {
         var g: Game = await props.playerStore.createPlayer(values.name, values.joinCode);
