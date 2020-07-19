@@ -32,3 +32,34 @@
     transform: rotate(360deg);
   }
 }
+
+.ant-notification-notice-message, 
+.ant-notification-notice-description, 
+.ant-notification-notice-close,
+.ant-modal-title,
+.ant-modal-body h2,
+.ant-modal-body h3,
+.ant-modal-close-x,
+.ant-modal-confirm-title,
+.ant-modal-confirm-content
+{
+  color: rgba(255,255,255,0.65) !important;
+}
+
+.ant-notification-notice, 
+.ant-modal-content, 
+.ant-modal-header {
+  background-color: #1F1F1F !important;
+}
+
+.ant-modal-footer {
+  border-top: 1px solid #303030 !important;
+}
+
+.ant-modal-header {
+  border-bottom: 1px solid #303030 !important;
+}
+
+.ant-modal-body h3 {
+  font-weight: 400;
+}

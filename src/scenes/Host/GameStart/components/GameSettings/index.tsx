@@ -1,4 +1,4 @@
-import { Row, Col, Card } from 'antd'
+import { Row, Col, Card, notification } from 'antd'
 import React, { useState, useEffect } from 'react'
 import './index.less'
 import PlayerRole from '../../../../../models/Players/playerRole'
@@ -33,20 +33,14 @@ const GameSettings = (props: GameSettingsProps) => {
     }, [game.players])
     
     const handleCheck = (e: any) => {
-        // TODO - FIX BUG
-        // First item added to list is somehow removed before the second item is added.
-        // Subsequent items are added and removed from list correctly
         if(e.target.className == "fadein") e.target.className = "fade";
         else e.target.className = "fadein";
         if(!goodRoles.includes(e.target.id)&&!evilRoles.includes(e.target.id)) {
-            console.log("Test"+ e.target.id +"  ehh");
             if(e.target.id <= 3) {
                 setGoodRoles([...goodRoles, e.target.id])
             } else {
                 setEvilRoles([...evilRoles, e.target.id])
             }
-            console.log(evilRoles.length);
-
         } else {
             console.log("Removing??")
             if(e.target.id <= 3) {
@@ -62,6 +56,21 @@ const GameSettings = (props: GameSettingsProps) => {
     }
 
     const startGame = async () => {
+        if(showGoodError || showEvilError) {
+            notification.error({
+                message: 'Incorrect settings!',
+                description: `You can choose a maximum of ${game.players.length - evilCount} good roles and ${evilCount} evil roles!`
+            })
+            return
+        }
+        if(game.players.length < 5) {
+            notification.error({
+                message: 'Incorrect settings!',
+                description: 'You need a minimum of 5 players',
+                duration: 20
+            })
+            return
+        }
         await gameStore?.startGame(game.id, [...goodRoles, ...evilRoles])
         history.push("/host")
     }
@@ -75,24 +84,26 @@ const GameSettings = (props: GameSettingsProps) => {
     ]
 
     useEffect(() => {
-        evilCount < evilRoles.length ? setShowEvilError(true) : setShowEvilError(false);
-        game.players.length - evilCount < goodRoles.length ? setShowGoodError(true) : setShowGoodError(false);
+        if(game.players.length > 4) {
+            evilCount < evilRoles.length ? setShowEvilError(true) : setShowEvilError(false);
+            game.players.length - evilCount < goodRoles.length ? setShowGoodError(true) : setShowGoodError(false);
+        }
     })
 
     const roles = Object.keys(PlayerRole).map(key => PlayerRole[key]).filter(value => typeof value === 'string') as string[];
    // const rolesHTML =  roles.map((role, index) => (<Row key={index}><Checkbox id={""+index} onChange={handleCheck}>{role}</Checkbox></Row>));
-    const rolesHTML =  roles.map((role, index) => (<Row key={index} >
-    <div  onClick={handleCheck} style = {{marginBottom: 20, borderRadius: 20}} > 
-    <Card 
-    
-    className = "Cards"
-    hoverable
-    loading
-    style={{ width: 150, height: 200}}
-    cover={<img id = {index.toString()} width="150" height="200" className = "fade" alt="example" src={array.find(role => role.RoleId === index)?.ImageSrc} />}
-    >  
-    </Card>
-    </div>
+    const rolesHTML =  roles.map((role, index) => (
+        <Row key={index} >
+        <div  onClick={handleCheck} style = {{marginBottom: 20, borderRadius: 20}} > 
+            <Card 
+                className = "Cards"
+                hoverable
+                loading
+                style={{ width: 150, height: 200}}
+                cover={<img id = {index.toString()} width="150" height="200" className = "fade" alt="example" src={array.find(role => role.RoleId === index)?.ImageSrc} />}
+            >  
+            </Card>
+        </div>
     </Row>));
 
 
@@ -101,7 +112,7 @@ const GameSettings = (props: GameSettingsProps) => {
             <div id = "BackgroundContainer">
             </div>     
             <Col span={24}>
-                <h2>Click on Image to add the Role to the Game:</h2>
+                <h2>Click on an image to add the Role to the Game:</h2>
             </Col>  
             <Col span={8} className ="Cols">
                 <Row >

@@ -18,7 +18,8 @@ import PlayerStore from '../../../stores/playerStore';
 import { Player } from '../../../models/Players/player';
 import { useHistory } from 'react-router-dom';
 import RoleModal from './components/RoleModal';
-import { Fab } from '@material-ui/core'
+import './index.less'
+import { Button } from 'antd';
 
 interface PlayGameProps {
     gameStore?: GameStore
@@ -90,18 +91,12 @@ const PlayGame = (props: PlayGameProps) => {
                     <>
                         {content()}
                         <RoleModal me={playerStore!.currentPlayer} showModal={showModal} toggleModal={toggleModal} />
-                        <Fab
-                            variant="extended"
-                            size="medium"
+                        <Button
                             onClick={toggleModal}
-                            style={{
-                                position: "fixed",
-                                bottom: "10px",
-                                right: "10px"
-                            }}
+                            className="button ros roleButton"
                         >
                             Role
-                        </Fab>
+                        </Button>
                     </>
                 )
             }

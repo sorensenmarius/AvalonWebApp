@@ -16,7 +16,7 @@ const HostSelectingTeam = (props: HostSelectingTeamProps) => {
             justify="center"
         >
             <Col>
-                <h1 className="header">{ game.currentPlayer.name } is picking a team!</h1>
+                <h1 className="header">{ game.currentPlayer.name } is picking a team of {game.currentRound.requiredPlayers}!</h1>
                 <h3>Current Players:</h3>
                 <List
                     grid={{

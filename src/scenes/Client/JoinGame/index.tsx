@@ -13,7 +13,7 @@ const JoinGame = (props: any) => {
 
     useEffect(() => {
         if(location.state != null && location.state['kicked']) {
-            notification.open({
+            notification.info({
                 message: 'Kicked',
                 description: 'You were kicked from the game by the host'
             })
@@ -21,6 +21,13 @@ const JoinGame = (props: any) => {
     })
 
     const join = async (values: any) => {
+        if(parseInt(values.joinCode) === undefined || values.joinCode.length !== 6) {
+            notification.info({
+                message: 'JoinCode error',
+                description: 'Invalid JoinCode. Must be 6 digit integer!'
+            })
+            return
+        }
         var g: Game = await props.playerStore.createPlayer(values.name, values.joinCode);
         await props.gameStore.get(g.id);
         history.push("/playGame")

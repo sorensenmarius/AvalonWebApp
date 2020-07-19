@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { Player } from '../../../../../models/Players/player';
 import { observer } from 'mobx-react';
 
@@ -17,14 +17,8 @@ const RoleModal = (props: RoleModalProps) => {
             title="Your role information"
             visible={showModal}
             centered
-            footer={
-                <Button
-                    onClick={toggleModal}
-                >
-                    Close
-                </Button>
-            }
             onCancel={toggleModal}
+            footer={null}
         >
             <h2>Your role is {me.roleName}</h2>
             {me.roleInfo.split('|').map((s: string, i: number) => (

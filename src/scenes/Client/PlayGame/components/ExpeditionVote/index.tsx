@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Row, Col, Button } from 'antd'
+import { Row, Col, Button, notification } from 'antd'
 import RoundStore from '../../../../../stores/roundStore'
 import { Game } from '../../../../../models/Game/game'
 import Stores from '../../../../../stores/storeIdentifier'
@@ -21,6 +21,13 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
     })
 
     const handleVote = async (accepted: Boolean) => {
+        if(!me.isEvil) {
+            notification.error({
+                message: 'Cannot reject expedition when you are good',
+                placement: 'bottomRight'
+            })
+            return
+        }
         setVoted(true)
         await roundStore?.expeditonVote(me.id, game.id, accepted)
     }

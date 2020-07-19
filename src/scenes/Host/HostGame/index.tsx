@@ -20,7 +20,6 @@ import './index.less';
 
 const HostGame = (props: any) => {
     const [game, setGame] = useState<Game>(props.gameStore.currentGame);
-
     useEffect(() => {
         setGame(props.gameStore.currentGame);
     }, [props.gameStore.currentGame])
@@ -75,7 +74,7 @@ const HostGame = (props: any) => {
             if(game.status === GameStatus.WaitingForPlayers) return <GameStart game={game}/>
             if(game.status === GameStatus.Playing) return(
                 <React.Fragment>
-                    <video autoPlay muted loop className="playingBackground">
+                    <video autoPlay muted loop className="playingBackground" >
                         <source src="/images/torches.webm" type="video/mp4" />
                     </video>
                     <Row>

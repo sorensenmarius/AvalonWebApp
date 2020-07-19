@@ -44,7 +44,7 @@ const SelectingTeam = (props: SelectingTeamProps) => {
                         return(
                             <>
                                 <h2>Pick a team!</h2>
-                                <h3>You need X players for this mission.</h3>
+                                <h3>You need {game.currentRound.requiredPlayers} players for this mission.</h3>
                                 {players.map((p: Player) => 
                                     <Row justify="center" key={p.id}>
                                         <Checkbox 
@@ -55,7 +55,12 @@ const SelectingTeam = (props: SelectingTeamProps) => {
                                         </Checkbox>
                                     </Row>
                                 )}
-                                <Button onClick={submitTeam}>Submit Team</Button>
+                                <Button 
+                                    onClick={submitTeam}
+                                    disabled={game.currentRound.requiredPlayers !== currentTeam.length}
+                                >
+                                    Submit Team
+                                </Button>
                             </>
                         )
                     }
