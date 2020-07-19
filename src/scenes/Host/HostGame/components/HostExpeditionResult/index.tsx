@@ -4,6 +4,8 @@ import { Game } from '../../../../../models/Game/game';
 import { Row, Col, Progress } from 'antd';
 import Stores from '../../../../../stores/storeIdentifier';
 import GameStore from '../../../../../stores/gameStore';
+import './index.less';
+
 
 interface HostExpeditionResultProps {
     game: Game

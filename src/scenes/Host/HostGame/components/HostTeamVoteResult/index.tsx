@@ -6,6 +6,8 @@ import { Player } from '../../../../../models/Players/player';
 import Stores from '../../../../../stores/storeIdentifier';
 import RoundStore from '../../../../../stores/roundStore';
 import RoundStatus from '../../../../../models/Round/roundStatus';
+import './index.less';
+
 
 interface HostTeamVoteResultProps {
     game: Game

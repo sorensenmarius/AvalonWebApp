@@ -84,17 +84,17 @@ const HostGame = (props: any) => {
                             <HostPreviousRounds game={game} />
                         </Col>
                         <Col
+                            className = "MainContent"
                             span={12}>
                             {currentContent()}
                         </Col>
                         <Col
                             span={6}
                         >
+                            <HostPlayerOrder game={game} />
                         </Col>
                     </Row>
-                    <Row>
-                        <HostPlayerOrder game={game} />
-                    </Row>
+
                 </React.Fragment>
             )
             if(game.status === GameStatus.AssassinTurn) return <HostAssassinTurn game={game} />
