@@ -21,7 +21,7 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
     })
 
     const handleVote = async (accepted: Boolean) => {
-        if(!me.isEvil) {
+        if(accepted && !me.isEvil) {
             notification.error({
                 message: 'Cannot reject expedition when you are good',
                 placement: 'bottomRight'
