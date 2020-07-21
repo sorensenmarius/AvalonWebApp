@@ -24,7 +24,6 @@ const HostSelectingTeam = (props: HostSelectingTeamProps) => {
             for(var i = 0; i < NameTagRow.length; i++)
             {
                 let randomNmr = Math.floor(Math.random() * 20)-10; 
-
                 console.log(randomNmr + " angle")
                 NameTagRow[i].setAttribute("style", "-moz-transform:rotate("+ randomNmr+"deg);")
                 NameTagRow[i].setAttribute("style", "-webkit-transform:rotate("+ randomNmr+"deg)")

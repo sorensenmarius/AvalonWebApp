@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Checkbox, Button } from 'antd';
+import { Col, Row, Checkbox, Button, notification } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { Player } from '../../../../../models/Players/player';
 import { Game } from '../../../../../models/Game/game';
@@ -33,6 +33,11 @@ const SelectingTeam = (props: SelectingTeamProps) => {
     }
 
     const submitTeam = async () => {
+        if(game.currentRound.requiredPlayers !== currentTeam.length) {
+            return notification.error({
+                message: `You need to select exactly ${game.currentRound.requiredPlayers} for this expedition`
+            })
+        }
         props.roundStore?.submitTeam(game.id);
     }
 
@@ -55,12 +60,12 @@ const SelectingTeam = (props: SelectingTeamProps) => {
                                         </Checkbox>
                                     </Row>
                                 )}
-                                <Button 
+                                <button
+                                    className={`button ros ${game.currentRound.requiredPlayers !== currentTeam.length ? 'redText' : ''}`}
                                     onClick={submitTeam}
-                                    disabled={game.currentRound.requiredPlayers !== currentTeam.length}
                                 >
                                     Submit Team
-                                </Button>
+                                </button>
                             </>
                         )
                     }
