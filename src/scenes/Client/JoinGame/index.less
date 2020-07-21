@@ -1,7 +1,7 @@
 #bg {
     width: 100%;
     height: 100%;
-    background: url("https://images2.alphacoders.com/486/thumb-1920-486587.jpg") no-repeat center center fixed;
+    background: url("/images/joinGameBackground.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -51,18 +51,12 @@
     from {opacity: 0;}
     to {opacity: 1;}
   }
-  .button,
-.button:hover .content,
-.button:after,
-.button:before {
-    background-image: url("http://eu.battle.net/d3/static/images/layout/try-free-button-sprite.png");
-}
 
 .ros.button,
 .ros.button:hover .content,
 .ros.button:after,
 .ros.button:before {
-    background-image: url("http://i.imgur.com/YEVxQhI.png");
+    background-image: url("/images/rosButton.png");
 }
 
 .button {
@@ -121,4 +115,19 @@
 .button:after {
     right: -2px;
     background-position: 0px -162px;
+}
+
+.ant-input {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.75);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ant-input:focus, .ant-input:hover  {
+  border: none;
+  border-bottom: 3px solid #05b8d6;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }

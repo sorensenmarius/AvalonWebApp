@@ -62,9 +62,17 @@ const PlayGame = (props: PlayGameProps) => {
         } catch(err) {
             console.log(err)
         }
-        connect.on("UpdateAll", function() {
-            gameStore!.get(game.id);
-        })
+        connect.on("UpdateAll", updateGame)
+    }
+
+    const updateGame = async () => {
+        let oldGame = game;
+        let newGame: Game = await gameStore!.get(game.id);
+        if(oldGame.status === newGame.status && newGame.status !== GameStatus.WaitingForPlayers) { // If game status doesn't change retry after two seconds
+            setTimeout(async () => {
+                await updateGame();
+            }, 2000)
+        }
     }
 
     const toggleModal = () => {
@@ -88,7 +96,7 @@ const PlayGame = (props: PlayGameProps) => {
             if(game.status === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
             if(game.status === GameStatus.Playing) {
                 return(
-                    <>
+                    <div className="client-background">
                         {content()}
                         <RoleModal me={playerStore!.currentPlayer} showModal={showModal} toggleModal={toggleModal} />
                         <Button
@@ -97,7 +105,7 @@ const PlayGame = (props: PlayGameProps) => {
                         >
                             Role
                         </Button>
-                    </>
+                    </div>
                 )
             }
             if(game.status === GameStatus.AssassinTurn) return <AssassinTurn me={playerStore!.currentPlayer} game={game} />

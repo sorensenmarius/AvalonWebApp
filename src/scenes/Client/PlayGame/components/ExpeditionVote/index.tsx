@@ -21,7 +21,7 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
     })
 
     const handleVote = async (accepted: Boolean) => {
-        if(accepted && !me.isEvil) {
+        if(!accepted && !me.isEvil) {
             notification.error({
                 message: 'Cannot reject expedition when you are good',
                 placement: 'bottomRight'
@@ -44,20 +44,23 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
                         } else {
                             return (
                                 <React.Fragment>
-                                    <h1>Voting for team</h1>
-                                    <Button 
-                                        type="primary"
-                                        onClick={() => handleVote(true)}
-                                    >
-                                        Accept
-                                    </Button>
-                                    <Button 
-                                        type="primary"
-                                        danger
-                                        onClick={() => handleVote(false)}
-                                    >
-                                        Decline
-                                    </Button>
+                                    <h1>Voting for expedition</h1>
+                                    <Row>
+                                        <button 
+                                            className="button ros"
+                                            onClick={() => handleVote(true)}
+                                        >
+                                            Success
+                                        </button>
+                                    </Row>
+                                    <Row>
+                                        <button 
+                                            className="button ros redBackground"
+                                            onClick={() => handleVote(false)}
+                                        >
+                                            Failure
+                                        </button>
+                                    </Row>
                                 </React.Fragment>
                             )
                         }
