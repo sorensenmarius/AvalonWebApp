@@ -15,47 +15,61 @@ const HostVoting = (props: HostVotingProps) => {
 
     if(expedition) {
         return(
-            <Row justify="center">
-                <Col>
-                    <h1>These players are on a mission</h1>
-                    <List
-                        grid={{
-                            gutter: 16,
-                            xs: 1,
-                            sm: 2,
-                            md: 4,
-                            lg: 4,
-                            xl: 6,
-                            xxl: 3}}
-                        dataSource={game.currentRound.currentTeam}
-                        renderItem={(p: Player) => (
-                            <List.Item>
-                                <span>{ p.name }</span>
-                            </List.Item>
-                        )}
-                    />
-                </Col>
-            </Row>
+            <Row
+            justify="center"
+        >
+            <Col>
+                <h1 className="header">These players are on a Mission</h1>
+                <List
+                className = "ItemList"
+                    grid={{
+                        gutter: 0,
+                        xs: 1,
+                        sm: 1,
+                        md: 1,
+                        lg: 1,
+                        xl: 1,
+                        xxl: 1}}
+                    dataSource={game.currentRound.currentTeam} 
+                    renderItem={(player: Player) => (
+                        <List.Item>
+                                <Row justify = "center"  >
+                                    <div className ="NameTagRow">
+                                    <span className = "PlayerName">{player.name}</span> 
+                                    </div>
+                                </Row>
+                        </List.Item>
+                    )}
+                />
+            </Col>
+        </Row>
         )
     } else {
         return(
             <Row justify="center">
                 <Col>
-                    <h1>Voting for team</h1>
+                <h1>Voting for team</h1>
+
                     <List
+                    className = "ItemList"
                         grid={{
-                            gutter: 16,
+                            gutter: 0,
                             xs: 1,
-                            sm: 2,
-                            md: 4,
-                            lg: 4,
-                            xl: 6,
-                            xxl: 3}}
-                        dataSource={game.currentRound.currentTeam}
-                        renderItem={(p: Player) => (
+                            sm: 1,
+                            md: 1,
+                            lg: 1,
+                            xl: 1,
+                            xxl: 1}}
+                        dataSource={game.currentRound.currentTeam} 
+                        renderItem={(player: Player) => (
                             <List.Item>
-                                <span>{ p.name }</span>
+                                    <Row justify = "center"  >
+                                        <div className ="NameTagRow">
+                                        <span className = "PlayerName">{player.name}</span> 
+                                        </div>
+                                    </Row>
                             </List.Item>
+
                         )}
                     />
                     <h2>Recorded {game.currentRound.votesForTeam + game.currentRound.votesAgainstTeam} out of {game.players.length} votes</h2>
@@ -63,6 +77,8 @@ const HostVoting = (props: HostVotingProps) => {
             </Row>
         )
     }
+
+
 }
 
 export default observer(HostVoting);

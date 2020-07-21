@@ -39,8 +39,8 @@ const Home = (props: any) => {
     return(
         <Row id="HomeScreen" justify="center" className="fader">
             <div id = "Title">
-                <Row justify="center"> 
-                    <h1 id = "AvalonText">Avalon</h1>
+                <Row justify="center" id="AvalonLogo"> 
+                    <img src="/images/Avalon.png" alt="Not found" width = "30%" height= "20%" z-index = "1"/>
                 </Row>
             </div>
             <div id = "buttonContainer">
