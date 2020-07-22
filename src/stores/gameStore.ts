@@ -19,6 +19,7 @@ export default class GameStore {
             return a.order - b.order
         })
         this.currentGame = response;
+        return response;
     }
 
     @action

@@ -33,7 +33,7 @@ const GameSettings = (props: GameSettingsProps) => {
     }, [game.players])
     
     const handleCheck = (e: any) => {
-        if(e.target.className == "fadein") e.target.className = "fade";
+        if(e.target.className === "fadein") e.target.className = "fade";
         else e.target.className = "fadein";
         if(!goodRoles.includes(e.target.id)&&!evilRoles.includes(e.target.id)) {
             if(e.target.id <= 3) {

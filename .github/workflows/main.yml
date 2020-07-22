@@ -27,10 +27,18 @@ jobs:
     - name: List output files
       run: ls
       
-    - name: FTP-Deploy-Action
+    #- name: FTP-Deploy-Action-Azure
+      #uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      #with:
+      #  ftp-server: ftp://waws-prod-osl-001.ftp.azurewebsites.windows.net/site/wwwroot
+      #  ftp-username: MobileAvalon\$MobileAvalon
+      #  ftp-password: ${{ secrets.AZUREFTPPASSWORD }} 
+      #  local-dir: build # This folder is NOT going to upload by default unless you add it to .git-ftp-include
+        
+    - name: FTP-Deploy-Action-Azure
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
-        ftp-server: ftp://waws-prod-osl-001.ftp.azurewebsites.windows.net/site/wwwroot
-        ftp-username: MobileAvalon\$MobileAvalon
-        ftp-password: ${{ secrets.AZUREFTPPASSWORD }} 
+        ftp-server: ftp.domeneshop.no/avalon
+        ftp-username: s0rensen
+        ftp-password: ${{ secrets.DOMENESHOPPASSWORD }} 
         local-dir: build # This folder is NOT going to upload by default unless you add it to .git-ftp-include

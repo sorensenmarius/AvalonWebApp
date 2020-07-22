@@ -35,8 +35,6 @@ const JoinGame = (props: any) => {
     
     return(
         <Row  id = "bg" justify="center">
-           {/*   <div id = "BackgroundContainer">
-            </div>  */} 
             <Col sm={16} lg={8}>
                 <Form className = "Formen"
                     onFinish={join}>
