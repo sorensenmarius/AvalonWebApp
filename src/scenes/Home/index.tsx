@@ -35,6 +35,9 @@ const Home = (props: any) => {
             history.push("/play");
         }, 1000);
     }
+    const HowToPlay = () => {
+        window.open("https://hobbylark.com/card-games/How-to-Play-Avalon",'_blank');
+    }
 
     return(
         <Row id="HomeScreen" justify="center" className="fader">
@@ -53,6 +56,11 @@ const Home = (props: any) => {
                     <Row>
                     <div className="button ros">
                         <span className="content" onClick={() => handleClient()}>Join Game</span>
+                    </div>                    
+                    </Row>
+                    <Row>
+                    <div className="button ros">
+                        <span className="content" onClick={() => HowToPlay()}>How to play</span>
                     </div>                    
                     </Row>
                 </Col>

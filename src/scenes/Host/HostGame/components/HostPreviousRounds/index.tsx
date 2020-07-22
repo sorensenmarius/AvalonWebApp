@@ -14,7 +14,8 @@ const HostPreviousRounds = (props: HostPreviousRoundsProps) => {
     const { game } = props
 
     return(
-        <React.Fragment>
+        <React.Fragment >
+            <div className = "Container">
             <Row>
                 <h2>Previous Rounds</h2>
             </Row>
@@ -81,6 +82,7 @@ const HostPreviousRounds = (props: HostPreviousRoundsProps) => {
                     </Col>
                 </Row>
             ))}
+            </div>
         </React.Fragment>
     )
 }
