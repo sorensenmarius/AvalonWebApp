@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Checkbox, Button, notification } from 'antd';
+import { Col, Row, Checkbox, notification } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { Player } from '../../../../../models/Players/player';
 import { Game } from '../../../../../models/Game/game';
