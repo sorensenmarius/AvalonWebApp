@@ -42,7 +42,7 @@ const PlayGame = (props: PlayGameProps) => {
     useEffect(() => {
         setGame(gameStore!.currentGame)
         let currentPlayer = gameStore!.currentGame.players.find((p: Player) => p.id === playerStore!.currentPlayer.id)!
-        if(currentPlayer != undefined) {
+        if(currentPlayer !== undefined) {
             playerStore!.currentPlayer = currentPlayer
         } else {
             history.push('/play', {
