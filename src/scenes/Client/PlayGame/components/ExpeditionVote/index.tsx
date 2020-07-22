@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Row, Col, Button, notification } from 'antd'
+import { Row, Col, notification } from 'antd'
 import RoundStore from '../../../../../stores/roundStore'
 import { Game } from '../../../../../models/Game/game'
 import Stores from '../../../../../stores/storeIdentifier'
