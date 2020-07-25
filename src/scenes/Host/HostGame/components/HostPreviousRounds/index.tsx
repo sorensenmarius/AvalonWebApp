@@ -51,10 +51,7 @@ const HostPreviousRounds = (props: HostPreviousRoundsProps) => {
                             ?
                                 <React.Fragment>
                                     <Row>
-                                        <h4>Failed teams</h4>
-                                    </Row>
-                                    <Row>
-                                        <h3>{r.failedTeams}</h3>
+                                        <h4>Failed teams: {r.failedTeams} </h4>
                                     </Row>
                                 </React.Fragment>
                             :
@@ -64,7 +61,7 @@ const HostPreviousRounds = (props: HostPreviousRoundsProps) => {
                             ?
                                 <React.Fragment>
                                     <Row>
-                                        <h4>Fail votes: {r.missionVoteBad}</h4>
+                                        <h4>Expedtion fail votes: {r.missionVoteBad}</h4>
                                     </Row>
                                 </React.Fragment>
                             :
