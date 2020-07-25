@@ -62,9 +62,7 @@ const HostGame = (props: any) => {
             case RoundStatus.VotingForTeam: return <HostVoting expedition={false} game={game} key="teamVote" />
             case RoundStatus.TeamApproved: return <HostTeamVoteResult accepted={true} game={game} key="teamVoteSuccessful"/>;
             case RoundStatus.TeamDenied: return <HostTeamVoteResult accepted={false} game={game} key="teamVoteFailed"/>;
-            case RoundStatus.VotingExpedition: return <HostVoting expedition={true} game={game} key="expeditionVote" />
-            case RoundStatus.MissionSuccess: return <HostExpeditionResult accepted={true} game={game} key="expeditionSuccessful" />;
-            case RoundStatus.MissionFailed: return <HostExpeditionResult accepted={false} game={game} key="expeditionFailed"/>;
+            case RoundStatus.VotingExpedition: return <HostVoting expedition={true} game={game} key="expeditionVote" />;
         }
         return null
     }
@@ -72,31 +70,39 @@ const HostGame = (props: any) => {
     return(
         (() => {
             if(game.status === GameStatus.WaitingForPlayers) return <GameStart game={game}/>
-            if(game.status === GameStatus.Playing) return(
-                <React.Fragment>
-                    <video autoPlay muted loop className="playingBackground" >
-                        <source src="/images/torches.webm" type="video/mp4" />
-                    </video>
-                    <Row>
-                        <Col
-                            span={6}
-                        >
-                            <HostPreviousRounds game={game} />
-                        </Col>
-                        <Col
-                            className = "MainContent"
-                            span={12}>
-                            {currentContent()}
-                        </Col>
-                        <Col
-                            span={6}
-                        >
-                            <HostPlayerOrder game={game} />
-                        </Col>
-                    </Row>
-
-                </React.Fragment>
-            )
+            if(game.status === GameStatus.Playing){
+                return(
+                    <React.Fragment>
+                        <video autoPlay muted loop className="playingBackground" >
+                            <source src="/images/torches.webm" type="video/mp4" />
+                        </video>
+                        {/* Hides side content while revealing team */}
+                        {game.currentRound.status === RoundStatus.MissionFailed || game.currentRound.status === RoundStatus.MissionSuccess
+                            ?
+                                <HostExpeditionResult game={game} /> 
+                            :
+                            <Row>
+                                <Col
+                                    span={6}
+                                >
+                                    <HostPreviousRounds game={game} />
+                                </Col>
+                                <Col
+                                    className = "MainContent"
+                                    span={12}>
+                                    {currentContent()}
+                                </Col>
+                                <Col
+                                    span={6}
+                                >
+                                    <HostPlayerOrder game={game} />
+                                </Col>
+                            </Row>
+                        }
+                    </React.Fragment>
+                )
+            } 
+            
             if(game.status === GameStatus.AssassinTurn) return <HostAssassinTurn game={game} />
             if(game.status === GameStatus.Ended) return <HostGameEnded game={game} />
             return null;
