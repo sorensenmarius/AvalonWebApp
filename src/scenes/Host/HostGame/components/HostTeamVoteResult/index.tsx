@@ -24,8 +24,8 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
         setTimeout(nextScreen, ms)
 
         const interval = setInterval(() => {
-            setMs(ms => ms - 10)
-        }, 10)
+            setMs(ms => ms - 100)
+        }, 100)
 
         setTimeout(() => {
             for(let i = 0 ; i < game.currentRound.votesForTeam; i++) {
