@@ -37,7 +37,7 @@ const HostExpeditionResult = (props: HostExpeditionResultProps) => {
             {(() => {
                         if(accepted) {
                             return(
-                                <React.Fragment>
+                                <React.Fragment >
                                     <Row>
                                         <h1>The mission was successful!</h1>
                                     </Row>
