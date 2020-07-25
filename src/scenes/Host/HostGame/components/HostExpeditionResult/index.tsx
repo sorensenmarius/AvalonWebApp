@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {observer, inject } from 'mobx-react';
 import { Game } from '../../../../../models/Game/game';
-import { Row, Col, Button } from 'antd';
+import { Row, Col } from 'antd';
 import Stores from '../../../../../stores/storeIdentifier';
 import GameStore from '../../../../../stores/gameStore';
 import './index.less';
