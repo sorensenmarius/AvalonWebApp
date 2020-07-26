@@ -54,7 +54,7 @@ const AssassinTurn = (props: AssassinTurn) => {
             </React.Fragment>
         )
     } else {
-        return(<h1>TESTESTSTST</h1>)
+        return(<h1>Waiting for Assassin to strike</h1>)
     }
 }
 
