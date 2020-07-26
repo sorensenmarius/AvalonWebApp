@@ -1,0 +1,45 @@
+.gameEnded {
+    padding-top: 10vh;
+
+    * {
+        background: transparent;
+        z-index: 1;
+    }
+
+    h3 {
+        color: white;
+    }
+
+    .ant-row {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    .ant-col:first-child {
+        padding-left: 0 !important;
+    }
+    
+    .ant-col:last-child {
+        padding-right: 0 !important;
+    }
+}
+
+.gameEndedBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    z-index: 0;
+}
+
+#goodWin {
+    background-image: url('/images/goodWinGameEnd.png');
+}
+
+#evilWin {
+    background-image: url('/images/evilWinGameEnd.png');
+}
