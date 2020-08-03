@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { HubConnectionBuilder } from '@aspnet/signalr';
+import { HubConnectionBuilder } from '@microsoft/signalr';
 import { inject, observer } from 'mobx-react';
 import Stores from '../../../stores/storeIdentifier';
 import AppConsts from '../../../lib/appconst';
@@ -52,6 +52,9 @@ const HostGame = (props: any) => {
             props.gameStore.get(props.gameStore.currentGame.id);
         })
         connect.on("UpdateHost", function () {
+            props.gameStore.get(props.gameStore.currentGame.id);
+        })
+        connect.onreconnected(() => {
             props.gameStore.get(props.gameStore.currentGame.id);
         })
     }

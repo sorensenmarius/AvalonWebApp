@@ -25,6 +25,8 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
             setSeconds(seconds => seconds - 1)
         }, 10)
         return () => clearInterval(interval)
+    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const nextScreen = async () => {

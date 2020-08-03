@@ -30,7 +30,14 @@ const GameSettings = (props: GameSettingsProps) => {
                 setEvilCount(n ? n : 0);
             };
         })();
-    }, [game.players])
+    }, [game.players, gameStore])
+
+    useEffect(() => {
+        if(game.players.length > 4) {
+            evilCount < evilRoles.length ? setShowEvilError(true) : setShowEvilError(false);
+            game.players.length - evilCount < goodRoles.length ? setShowGoodError(true) : setShowGoodError(false);
+        }
+    }, [game.players.length, evilCount, evilRoles.length, goodRoles.length])
     
     const handleCheck = (e: any) => {
         if(e.target.className === "fadein") e.target.className = "fade";
@@ -82,13 +89,6 @@ const GameSettings = (props: GameSettingsProps) => {
         {RoleId: 7, ImageSrc: "/images/Assassin.png"},
         {RoleId: 8, ImageSrc: "/images/Oberon.png"},
     ]
-
-    useEffect(() => {
-        if(game.players.length > 4) {
-            evilCount < evilRoles.length ? setShowEvilError(true) : setShowEvilError(false);
-            game.players.length - evilCount < goodRoles.length ? setShowGoodError(true) : setShowGoodError(false);
-        }
-    })
 
     const roles = Object.keys(PlayerRole).map(key => PlayerRole[key]).filter(value => typeof value === 'string') as string[];
    // const rolesHTML =  roles.map((role, index) => (<Row key={index}><Checkbox id={""+index} onChange={handleCheck}>{role}</Checkbox></Row>));

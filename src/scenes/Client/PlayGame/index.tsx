@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import WaitingForPlayers from './components/WaitingForPlayers'
-import { HubConnectionBuilder } from '@aspnet/signalr';
+import { HubConnectionBuilder } from '@microsoft/signalr';
 import { inject, observer } from 'mobx-react';
 import Stores from '../../../stores/storeIdentifier';
 import AppConsts from '../../../lib/appconst';
@@ -49,7 +49,7 @@ const PlayGame = (props: PlayGameProps) => {
                 kicked: true
             })
         }
-    }, [gameStore?.currentGame])
+    }, [gameStore, history, playerStore, gameStore?.currentGame])
 
     const initSocket = async () => {
         const connect = new HubConnectionBuilder()
@@ -63,6 +63,10 @@ const PlayGame = (props: PlayGameProps) => {
             console.log(err)
         }
         connect.on("UpdateAll", updateGame)
+        connect.onreconnected(() => {
+            updateGame()
+            alert('Reconnected and updated game')
+        })
     }
 
     const updateGame = async () => {
