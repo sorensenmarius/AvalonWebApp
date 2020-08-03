@@ -1,7 +1,66 @@
+.BackgroundContainer{
+    background-color: grey;
+    opacity: 0.3;
+    width: 130%;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+    mask-image: linear-gradient(90deg, rgba(0,0,0,1) 80%, rgba(0,0,0,1) 80%);
+    -webkit-mask-image: linear-gradient(90deg, rgb(128, 128, 128) 80%, rgba(128,128,128,0.05) 100%);
+
+}
+.NameH{
+    margin-right: 10px;
+    margin-left: 10px;
+}
 .previousRoundMissionFailed {
-    border: 1px solid red;
+    border: 2px solid red;
+    height: 200px;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
 .previousRoundMissionSuccess {
-    border: 1px solid green;
+    border: 2px solid green;
+    height: 200px;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
+
+}
+.RoundContainer{
+    color:white;
+    padding: 10px;
+    height: 100%;
+    width: 25%;
+    z-index: 10;
+    position: fixed;
+}
+.RoundContainer h2, h3, h4{
+    color: white;
+}
+.ContainerCol{
+    width: 100%;
+}
+.HeaderFailure{
+    background-image: url(/images/Failure.png);
+    width: 100%;
+    height: 45%;
+    background-size: 200px 75px;
+    background-repeat: no-repeat;
+    z-index: 1;
+    background-position: 50% 0;
+}
+.HeaderSuccess{
+    background-image: url(/images/Success.png);
+    width: 100%;
+    height: 45%;
+    background-size: 200px 75px;
+    background-repeat: no-repeat;
+    z-index: 1;
+    background-position: 50% 0;
+}
+.VotesForTeam{
+    padding-right: 10px;
 }

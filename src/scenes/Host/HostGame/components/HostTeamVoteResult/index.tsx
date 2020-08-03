@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import {observer, inject } from 'mobx-react';
 import { Game } from '../../../../../models/Game/game';
 import { Row, Col, Progress } from 'antd';
-import { Player } from '../../../../../models/Players/player';
 import Stores from '../../../../../stores/storeIdentifier';
 import RoundStore from '../../../../../stores/roundStore';
 import RoundStatus from '../../../../../models/Round/roundStatus';
@@ -17,17 +16,37 @@ interface HostTeamVoteResultProps {
 
 const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
     const { accepted, game, roundStore } = props;
-    const [seconds, setSeconds] = useState(200)
-
+    const [ms, setMs] = useState(20000);
+    const [goodTeamVotes, setGoodTeamVotes] = useState(0);
+    const [evilTeamVotes, setEvilTeamVotes] = useState(0)
+    
     useEffect(() => {
-        setTimeout(nextScreen, seconds * 10)
+        setTimeout(nextScreen, ms)
+
         const interval = setInterval(() => {
-            setSeconds(seconds => seconds - 1)
-        }, 10)
+            setMs(ms => ms - 100)
+        }, 100)
+
+        setTimeout(() => {
+            for(let i = 0 ; i < game.currentRound.votesForTeam; i++) {
+                setTimeout(() => {
+                    setGoodTeamVotes(i + 1)
+                }, 500 * i)
+            }
+
+            for(let i = 0 ; i < game.currentRound.votesAgainstTeam; i++) {
+                setTimeout(() => {
+                    setEvilTeamVotes(i + 1)
+                }, 500 * i)
+            }
+        }, ms * 0.15)
+
         return () => clearInterval(interval)
     
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
 
     const nextScreen = async () => {
         if (accepted) {
@@ -39,69 +58,42 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
 
 
     return(
-        <Row
-            justify="center"
-        >
-            <Col>
-            {(() => {
-                        if(accepted) {
-                            return(
-                                <React.Fragment>
-                                    <h1>The vote was successful!</h1>
-                                    <Row
-                                        gutter={[16, 24]}
-                                    >
-                                        <Col span={8}>
-                                            Votes for team
-                                        </Col>
-                                        <Col span={8}>
-                                            Votes against team
-                                        </Col>
-                                    </Row>
-                                    <Row
-                                        gutter={[16, 24]}
-                                    >
-                                        <Col span={8}>
-                                            {game.currentRound.votesForTeam}
-                                        </Col>
-                                        <Col span={8}>
-                                            {game.currentRound.votesAgainstTeam}
-                                        </Col>
-                                    </Row>
-                                    <Row justify="center">
-                                        {game.currentRound.currentTeam.map((p: Player) => (
-                                            <Col key={"hostTeamVoteResultName" + p.name}>
-                                                {p.name}  
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                    <Row>
-                                        <h2>Are going on an adventure!</h2>
-                                    </Row>
-                                </React.Fragment>
-                            )
-                        } else {
-                            return (
-                                <React.Fragment>
-                                    <Row>
-                                        <h1>The vote failed!</h1>
-                                    </Row>
-                                    <Row>
-                                        <h2>The next player to choose a team is {game.currentPlayer.name}</h2>
-                                    </Row>
-                                    <Row>
-                                        <h3>Failed missions: {game.currentRound.failedTeams}</h3>
-                                        <h4>5 failed teams results in automatic failed mission</h4>
-                                    </Row>
-                                </React.Fragment>
-                            )
-                        }
-                    })()}
-                <Row>
-                    <Progress percent={seconds/20} format={() => ""} key="teamProgressBar" />
-                </Row>
-            </Col>
-        </Row>
+        <>
+            <Row
+                justify="center"
+                gutter={[24, 16]}
+            >
+                <Col>
+                    <Row>
+                        <h3>Votes for</h3>
+                    </Row>
+                    <Row>
+                        <span className='teamVoteNumber' id='goodTeamVoteNumber'>{goodTeamVotes}</span>
+                    </Row>
+                </Col>
+                <Col>
+                    <Row>
+                        <h3>Votes against</h3>
+                    </Row>
+                    <Row>
+                        <span className='teamVoteNumber' id='evilTeamVoteNumber'>{evilTeamVotes}</span>
+                    </Row>
+                </Col>
+            </Row>
+            <Progress 
+                style={{
+                    width: '100vw',
+                    position: 'fixed',
+                    bottom: '0',
+                    left: '0'
+                }} 
+                strokeLinecap='square'
+                strokeColor='#b02604'
+                percent={ms/200} 
+                format={() => ""} 
+                key="teamProgressBar" 
+            />
+        </>
     )
 }
 
