@@ -65,7 +65,6 @@ const PlayGame = (props: PlayGameProps) => {
         connect.on("UpdateAll", updateGame)
         connect.onreconnected(() => {
             updateGame()
-            alert('Reconnected and updated game')
         })
     }
 
