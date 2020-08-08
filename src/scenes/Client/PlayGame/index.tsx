@@ -20,6 +20,7 @@ import { useHistory } from 'react-router-dom';
 import RoleModal from './components/RoleModal';
 import './index.less'
 import { Button } from 'antd';
+import { ReloadOutlined } from '@ant-design/icons';
 
 interface PlayGameProps {
     gameStore?: GameStore
@@ -62,18 +63,18 @@ const PlayGame = (props: PlayGameProps) => {
         } catch(err) {
             console.log(err)
         }
-        connect.on("UpdateAll", updateGame)
+        connect.on("UpdateAll", () => updateGame(false))
         connect.onreconnected(() => {
-            updateGame()
+            updateGame(false)
         })
     }
 
-    const updateGame = async () => {
+    const updateGame = async (manual: boolean) => {
         let oldGame = game;
         let newGame: Game = await gameStore!.get(game.id);
-        if(oldGame.status === newGame.status && newGame.status !== GameStatus.WaitingForPlayers) { // If game status doesn't change retry after two seconds
+        if(oldGame.status === newGame.status && newGame.status !== GameStatus.WaitingForPlayers && !manual) { // If game status doesn't change retry after two seconds, unless reload is manually started
             setTimeout(async () => {
-                await updateGame();
+                await updateGame(manual);
             }, 2000)
         }
     }
@@ -94,7 +95,7 @@ const PlayGame = (props: PlayGameProps) => {
         }
         return
     }
-    return(
+    return( 
         (() => {
             if(game.status === GameStatus.WaitingForPlayers) return <WaitingForPlayers game={game}/>
             if(game.status === GameStatus.Playing) {
@@ -107,6 +108,12 @@ const PlayGame = (props: PlayGameProps) => {
                             className="button ros roleButton"
                         >
                             Role
+                        </Button>
+                        <Button
+                            onClick={() => updateGame(true)}
+                            className="button ros reloadButton"
+                        >
+                            <ReloadOutlined />
                         </Button>
                     </div>
                 )
