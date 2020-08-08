@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { Game } from '../../../models/Game/game'
 import Stores from '../../../stores/storeIdentifier'
 import './index.less';
+import 'mobx-react-lite/batchingForReactDom'
 
 
 const JoinGame = (props: any) => {

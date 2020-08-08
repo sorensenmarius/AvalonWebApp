@@ -29,6 +29,8 @@ const HostExpeditionResult = (props: HostExpeditionResultProps) => {
 
         setTimeout(reveal, 3000, tmpVotes)
         setTimeout(nextScreen, 1000 * tmpVotes.length + 13000)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const reveal = (tmpVotes: boolean[]) => {
@@ -50,7 +52,9 @@ const HostExpeditionResult = (props: HostExpeditionResultProps) => {
             className="verticallyCentered"
         >
             {votes.map((v, index) => (
-                <Col>
+                <Col
+                    key={'flipVote'+index}
+                >
                     <div 
                         style={{
                             width: 'calc(80vw / ' + votes.length + ')',
@@ -58,7 +62,6 @@ const HostExpeditionResult = (props: HostExpeditionResultProps) => {
                         }}
                         className="flip-vote" 
                         id={'flipVote'+index} 
-                        key={'flipVote'+index}
                     >
                         <div className="flip-vote-inner">
                             <div className="flip-vote-front" />

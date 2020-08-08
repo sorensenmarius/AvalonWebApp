@@ -20,7 +20,7 @@ const SelectingTeam = (props: SelectingTeamProps) => {
     
     useEffect(() => {
         roundStore?.setTeam(game.id, currentTeam)
-    }, [currentTeam])
+    }, [game.id, roundStore, currentTeam])
 
     const checkedPlayer = async (playerId: string) => {
         if (currentTeam.includes(playerId)) {

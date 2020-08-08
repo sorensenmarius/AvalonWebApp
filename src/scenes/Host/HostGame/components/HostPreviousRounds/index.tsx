@@ -3,7 +3,6 @@ import { observer } from 'mobx-react'
 import { Game } from '../../../../../models/Game/game'
 import { Row, Col } from 'antd'
 import { Round } from '../../../../../models/Round/round'
-import { Player } from '../../../../../models/Players/player'
 import "./index.less"
 
 interface HostPreviousRoundsProps {
@@ -20,20 +19,18 @@ const HostPreviousRounds = (props: HostPreviousRoundsProps) => {
             <Row>
                 <h2>Previous Rounds</h2>
             </Row>
-            {game.previousRounds.map((r: Round, i: number) => (
+            {game.previousRounds.reverse().map((r: Round, i: number) => (
                 <Row
+                    key={"prevRound" + i}
                     className={r.missionVoteBad >= 1 ? "previousRoundMissionFailed" : "previousRoundMissionSuccess"}
                 >
                     <Col className= "ContainerCol">
                         <Row className ={r.missionVoteBad >= 1 ? "HeaderFailure" : "HeaderSuccess"}>
-                        <h2>#{i + 1}</h2>   
+                        <h2>#{game.previousRounds.length - i}</h2>   
                         </Row>
                         <Row>
                             <h3>Team: </h3>
-                            {r.currentTeam.map((p: Player) => (
-                                <h3 className = "NameH">{p.name}</h3>
-                               
-                            ))}
+                            <h3 className = "NameH">{r.teamString}</h3>
                         </Row>
                         <Row>
                             <Col>

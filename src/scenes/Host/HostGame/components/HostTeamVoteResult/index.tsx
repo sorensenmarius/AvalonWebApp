@@ -42,6 +42,8 @@ const HostTeamVoteResult = (props: HostTeamVoteResultProps) => {
         }, ms * 0.15)
 
         return () => clearInterval(interval)
+    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

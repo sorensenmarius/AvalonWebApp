@@ -18,7 +18,7 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
 
     useEffect(() => {
         setCanVote(game.currentRound.currentTeam.some(p => p.id === me.id))
-    })
+    }, [game.currentRound.currentTeam, me.id])
 
     const handleVote = async (accepted: Boolean) => {
         if(!accepted && !me.isEvil) {
