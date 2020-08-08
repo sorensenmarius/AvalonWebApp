@@ -1,11 +1,16 @@
-# ASP.NET Boilerplate ReactJS Template
+# Avalon: The Resistance - Online Couch Game
 
-The React.js integration for ABP Boilerplate framework. This template is built on React+Mobx+Typescript. SOLID, SoC principles are used.
+The React.js implementation of the card rpg Avalon: The Resistance.
 
-![](_screenshots/dashboard.png)
+Play at [avalon.s0rensen.no](avalon.s0rensen.no)
+
+## Authors
+
+* **Marius Sørensen** - [sorensenmarius](https://github.com/sorensenmarius) - [s0rensen.no](www.s0rensen.no)
+* **Simon Degen** - [SimonDegen](https://github.com/SimonDegen) - [degen.no](www.degen.no)
 
 ## Getting Started
-
+This game is built with [AspNet Boilerplate](https://aspnetboilerplate.com/)
 ### Installing
 
 After cloning repository, first install npm packages:
@@ -36,7 +41,7 @@ npm build
 
 # Architecture
 
-This framework is designed by utilizing MVC design pattern and layered architecture as follows:
+This game is designed by utilizing MVC design pattern and layered architecture as follows:
 
 - All Backend communications are done by service layer.
 - For every Container Component there exists one Store and one Model.
