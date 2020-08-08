@@ -52,7 +52,9 @@ const HostExpeditionResult = (props: HostExpeditionResultProps) => {
             className="verticallyCentered"
         >
             {votes.map((v, index) => (
-                <Col>
+                <Col
+                    key={'flipVote'+index}
+                >
                     <div 
                         style={{
                             width: 'calc(80vw / ' + votes.length + ')',
@@ -60,7 +62,6 @@ const HostExpeditionResult = (props: HostExpeditionResultProps) => {
                         }}
                         className="flip-vote" 
                         id={'flipVote'+index} 
-                        key={'flipVote'+index}
                     >
                         <div className="flip-vote-inner">
                             <div className="flip-vote-front" />

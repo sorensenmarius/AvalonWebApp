@@ -10,6 +10,7 @@ export interface Round {
     missionVoteGood: number;
     missionVoteBad: number;
     requiredPlayers: number;
+    teamString: string;
 }
 
 export class EmptyRound implements Round {
@@ -21,6 +22,7 @@ export class EmptyRound implements Round {
     missionVoteGood: number;
     missionVoteBad: number;
     requiredPlayers: number;
+    teamString: string;
 
     constructor() {
         this.failedTeams = 0
@@ -31,5 +33,6 @@ export class EmptyRound implements Round {
         this.missionVoteGood = 0;
         this.missionVoteBad = 0;
         this.requiredPlayers = 0;
+        this.teamString = '';
     }
 }
