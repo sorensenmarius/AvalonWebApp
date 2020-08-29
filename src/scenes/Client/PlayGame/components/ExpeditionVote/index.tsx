@@ -13,7 +13,7 @@ interface ExpeditionVoteProps {
 
 const ExpeditionVote = (props: ExpeditionVoteProps) => {
     const { me, game, roundStore } = props
-    const [voted, setVoted] = useState<Boolean>(false)
+    const [voteStatus, setVoteStatus] = useState<Number>(0)
     const [canVote, setCanVote] = useState(false)
 
     useEffect(() => {
@@ -21,6 +21,7 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
     }, [game.currentRound.currentTeam, me.id])
 
     const handleVote = async (accepted: Boolean) => {
+        if(voteStatus !== 0) return
         if(!accepted && !me.isEvil) {
             notification.error({
                 message: 'Cannot reject expedition when you are good',
@@ -28,8 +29,19 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
             })
             return
         }
-        setVoted(true)
-        await roundStore?.expeditonVote(me.id, game.id, accepted)
+        sendVote(accepted)
+    }
+
+    const sendVote = async (accepted: Boolean) => {
+        setVoteStatus(1)
+        let res = await roundStore?.expeditonVote(me.id, game.id, accepted)
+        console.log(res)
+        if(res !== null) { 
+            setVoteStatus(2) 
+        } else {
+            console.log('Expedition vote failed, trying again!')
+            sendVote(accepted)
+        } 
     }
 
     return(
@@ -37,7 +49,7 @@ const ExpeditionVote = (props: ExpeditionVoteProps) => {
             <Col>
                 {(() => {
                     if(canVote) {
-                        if(voted) {
+                        if(voteStatus === 2) {
                             return(
                                 <h1>Waiting for all votes</h1>
                             )

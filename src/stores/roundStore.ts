@@ -13,16 +13,17 @@ export default class RoundStore {
     }
 
     @action
-    async voteForTeam(PlayerId: string, GameId: string, Vote: Boolean) {
+    async voteForTeam(PlayerId: string, GameId: string, Vote: Boolean): Promise<Round> {
         let response = await roundService.voteForTeam(PlayerId, GameId, Vote);
         this.currentRound = response;
         return response
     }
 
     @action
-    async expeditonVote(PlayerId: string, GameId: string, Vote: Boolean) {
+    async expeditonVote(PlayerId: string, GameId: string, Vote: Boolean): Promise<Round> {
         let response = await roundService.expeditonVote(PlayerId, GameId, Vote);
         this.currentRound = response;
+        return response
     }
 
     @action
