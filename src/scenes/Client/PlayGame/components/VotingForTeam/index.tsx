@@ -13,18 +13,32 @@ interface VotingForTeamProps {
 
 const VotingForTeam = (props: VotingForTeamProps) => {
     const { me, game, roundStore } = props
-    const [voted, setVoted] = useState<Boolean>(false)
+    const [voteStatus, setVoteStatus] = useState<Number>(0)
 
     const handleVote = async (accepted: Boolean) => {
-        setVoted(true)
-        await roundStore?.voteForTeam(me.id, game.id, accepted)
+        if(voteStatus !== 0) return
+        setVoteStatus(1)
+        sendVote(accepted)
+    }
+
+    
+    const sendVote = async (accepted: Boolean) => {
+        setVoteStatus(1)
+        let res = await roundStore?.voteForTeam(me.id, game.id, accepted)
+        console.log(res)
+        if(res !== null) { 
+            setVoteStatus(2) 
+        } else {
+            console.log('Team vote failed, trying again!')
+            sendVote(accepted)
+        } 
     }
 
     return(
         <Row justify="center">
             <Col>
                 {(() => {
-                    if(voted) {
+                    if(voteStatus === 2) {
                         return(
                             <h1>Waiting for all votes</h1>
                         )
