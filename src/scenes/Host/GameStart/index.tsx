@@ -29,14 +29,10 @@ const GameStart = (props: any) => {
                         <h1>{game.joinCode}</h1>
                         <h3>Current Players:</h3>
                         <List
-                            grid={{
-                                gutter: 16,
-                                xs: 1,
-                                sm: 2,
-                                md: 4,
-                                lg: 4,
-                                xl: 6,
-                                xxl: 3}}
+                            style={{
+                                minWidth: '700px'
+                            }}
+                            grid={{ gutter: 16, column: 4 }}
                             dataSource={game.players} 
                             locale={{
                                 emptyText: (
