@@ -56,7 +56,7 @@ const JoinGame = (props: any) => {
                     >
                         <div className = "InputContainer">
                             <img src="/images/fnick1.png" alt="" width = "300px" />
-                            <Input className="inputfield" placeholder = "Nickname"/>
+                            <Input className="inputfield" placeholder = "Nickname" maxLength={20}/>
                         </div>
                         
                     </Form.Item>
